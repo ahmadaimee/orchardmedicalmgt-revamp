@@ -1341,7 +1341,7 @@ html[data-theme="dark"] .footer-legal span { opacity: 0.3; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
   .form-row { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: var(--space-8); padding-bottom: 88px; }
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-8); }
   .footer-bottom-inner { flex-direction: column; text-align: center; }
   .cta-heading { font-size: var(--text-3xl); }
   .cta-actions { flex-direction: column; align-items: center; }
@@ -1704,7 +1704,12 @@ html[data-theme="dark"] .footer-legal span { opacity: 0.3; }
   flex-direction: column;
   align-items: flex-end;
   gap: var(--space-3);
+  /* Prevent the invisible chatbot window from blocking clicks on page elements */
+  pointer-events: none;
 }
+/* Re-enable clicks only on the toggle button and the open chat window */
+.chatbot-toggle            { pointer-events: all; }
+.chatbot-open .chatbot-window { pointer-events: all; }
 
 /* Toggle button */
 .chatbot-toggle {
