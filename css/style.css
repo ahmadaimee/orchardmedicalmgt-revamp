@@ -1318,7 +1318,7 @@ html[data-theme="dark"] .footer-legal span { opacity: 0.3; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
   .form-row { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-8); padding-bottom: 88px; }
   .footer-bottom-inner { flex-direction: column; text-align: center; }
   .cta-heading { font-size: var(--text-3xl); }
   .cta-actions { flex-direction: column; align-items: center; }
