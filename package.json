@@ -1,0 +1,14 @@
+{
+  "name": "orchardmedicalmgt-revamp",
+  "version": "1.0.0",
+  "description": "Orchard Medical Management website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.9",
+    "busboy": "^1.6.0"
+  }
+}

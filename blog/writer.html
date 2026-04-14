@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Writer — Orchard Medical Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #2563EB;
+      --accent-dark: #1D4ED8;
+      --accent-light: #EFF6FF;
+      --bg: #F8FAFC;
+      --surface: #FFFFFF;
+      --border: #E2E8F0;
+      --text: #0A0F1E;
+      --muted: #64748B;
+      --green: #16A34A;
+      --red: #DC2626;
+      --radius: 10px;
+      --font: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── Top Bar ── */
+    .topbar {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 0 24px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100; gap: 16px;
+    }
+    .topbar-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1rem; color: var(--text); }
+    .topbar-brand i { color: var(--accent); font-size: 1.2rem; }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 8px; font-size: 0.875rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent-light); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--bg); color: var(--text); }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: #15803D; }
+
+    /* ── Layout ── */
+    .editor-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr 1fr;
+      grid-template-rows: 1fr;
+      flex: 1;
+      overflow: hidden;
+      height: calc(100vh - 56px);
+    }
+
+    /* ── Sidebar: Metadata ── */
+    .sidebar {
+      background: var(--surface); border-right: 1px solid var(--border);
+      overflow-y: auto; padding: 20px 16px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .sidebar-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+    .field input, .field select, .field textarea {
+      padding: 8px 10px; border: 1px solid var(--border); border-radius: 7px;
+      font-family: var(--font); font-size: 0.875rem; color: var(--text);
+      background: var(--bg); outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .field textarea { resize: vertical; min-height: 70px; }
+    .field-hint { font-size: 0.72rem; color: var(--muted); }
+    .char-count { font-size: 0.72rem; color: var(--muted); text-align: right; }
+    .char-count.warn { color: var(--red); }
+
+    /* Tags input */
+    .tags-wrap { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; border: 1px solid var(--border); border-radius: 7px; background: var(--bg); min-height: 40px; cursor: text; }
+    .tags-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+    .tag-chip { display: inline-flex; align-items: center; gap: 4px; background: var(--accent-light); color: var(--accent); border-radius: 5px; padding: 2px 7px; font-size: 0.75rem; font-weight: 600; }
+    .tag-chip button { background: none; border: none; cursor: pointer; color: var(--accent); padding: 0; line-height: 1; font-size: 0.9rem; }
+    .tag-chip button:hover { color: var(--red); }
+    .tags-input { border: none; background: transparent; outline: none; font-size: 0.8rem; font-family: var(--font); color: var(--text); min-width: 80px; flex: 1; }
+
+    /* Status */
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94A3B8; margin-right: 5px; transition: background 0.3s; }
+    .status-dot.saved { background: var(--green); }
+    .status-label { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── Markdown Editor ── */
+    .editor-pane {
+      display: flex; flex-direction: column;
+      border-right: 1px solid var(--border); overflow: hidden;
+    }
+    .pane-header {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 8px 16px; font-size: 0.78rem; font-weight: 600; color: var(--muted);
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .pane-header-left { display: flex; align-items: center; gap: 8px; }
+    .pane-badge { background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; font-size: 0.7rem; }
+    .md-toolbar { display: flex; gap: 2px; }
+    .md-btn { background: none; border: none; cursor: pointer; padding: 4px 7px; border-radius: 5px; font-size: 0.8rem; color: var(--muted); transition: all 0.1s; font-family: var(--mono); }
+    .md-btn:hover { background: var(--bg); color: var(--text); }
+    .md-btn.sep { width: 1px; height: 16px; background: var(--border); margin: 0 3px; padding: 0; cursor: default; }
+    #mdEditor {
+      flex: 1; padding: 20px 24px; font-family: var(--mono); font-size: 0.9rem;
+      line-height: 1.8; color: var(--text); background: var(--surface);
+      border: none; outline: none; resize: none; overflow-y: auto;
+      tab-size: 2;
+    }
+    #mdEditor::placeholder { color: var(--muted); }
+
+    /* ── Preview Pane ── */
+    .preview-pane { display: flex; flex-direction: column; overflow: hidden; }
+    .preview-scroll { flex: 1; overflow-y: auto; padding: 32px 40px; }
+
+    /* Preview article styles */
+    .preview-article { max-width: 680px; margin: 0 auto; }
+    .preview-article h1 { font-size: 2rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 12px; color: var(--text); }
+    .preview-article h2 { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; color: var(--text); }
+    .preview-article h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: var(--text); }
+    .preview-article h4 { font-size: 1rem; font-weight: 700; margin: 1.2rem 0 0.4rem; }
+    .preview-article p { font-size: 1rem; line-height: 1.8; color: #334155; margin-bottom: 1rem; }
+    .preview-article ul, .preview-article ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .preview-article li { line-height: 1.7; margin-bottom: 0.3rem; color: #334155; }
+    .preview-article strong { font-weight: 700; color: var(--text); }
+    .preview-article em { font-style: italic; }
+    .preview-article a { color: var(--accent); text-decoration: none; }
+    .preview-article a:hover { text-decoration: underline; }
+    .preview-article code { font-family: var(--mono); font-size: 0.85em; background: #F1F5F9; padding: 2px 6px; border-radius: 4px; color: #1E40AF; }
+    .preview-article pre { background: #0F172A; color: #E2E8F0; padding: 20px 24px; border-radius: 10px; overflow-x: auto; margin: 1.5rem 0; font-family: var(--mono); font-size: 0.85rem; line-height: 1.6; }
+    .preview-article pre code { background: none; color: inherit; padding: 0; }
+    .preview-article blockquote { border-left: 4px solid var(--accent); margin: 1.5rem 0; padding: 12px 20px; background: var(--accent-light); border-radius: 0 8px 8px 0; }
+    .preview-article blockquote p { color: var(--text); margin: 0; font-style: italic; }
+    .preview-article hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .preview-article table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+    .preview-article th { background: var(--bg); padding: 10px 14px; text-align: left; font-weight: 600; border: 1px solid var(--border); }
+    .preview-article td { padding: 10px 14px; border: 1px solid var(--border); }
+    .preview-article tr:nth-child(even) td { background: #FAFAFA; }
+
+    .preview-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .preview-tag { background: var(--accent-light); color: var(--accent); padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
+    .preview-date { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #0F172A; color: #fff; padding: 10px 20px; border-radius: 9px;
+      font-size: 0.875rem; font-weight: 500; pointer-events: none;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
+      opacity: 0; z-index: 9999; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ── Instructions panel ── */
+    .instructions { padding: 24px; color: var(--muted); max-width: 500px; }
+    .instructions h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .instructions .md-ref { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .md-ref table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .md-ref th { background: var(--border); padding: 6px 12px; text-align: left; font-weight: 600; }
+    .md-ref td { padding: 5px 12px; border-top: 1px solid var(--border); font-family: var(--mono); }
+    .md-ref td:first-child { color: var(--accent); width: 45%; }
+    .md-ref td:last-child { color: var(--muted); font-family: var(--font); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .editor-layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr 1fr; }
+      .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <i class="fas fa-pen-nib"></i>
+      OMM Blog Writer
+    </div>
+    <div class="topbar-actions">
+      <span class="status-label"><span class="status-dot" id="statusDot"></span><span id="statusText">Unsaved</span></span>
+      <button class="btn btn-ghost" onclick="saveDraft()"><i class="fas fa-save"></i> Save Draft</button>
+      <button class="btn btn-outline" onclick="loadDraft()"><i class="fas fa-folder-open"></i> Load Draft</button>
+      <button class="btn btn-primary" onclick="downloadHTML()"><i class="fas fa-download"></i> Download HTML</button>
+    </div>
+  </div>
+
+  <!-- Editor Layout -->
+  <div class="editor-layout">
+
+    <!-- Left: Metadata Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-title"><i class="fas fa-sliders"></i> Post Settings</div>
+
+      <div class="field">
+        <label for="fTitle">Title *</label>
+        <input type="text" id="fTitle" placeholder="Enter post title…" oninput="updateCharCount('fTitle','titleCount',80); debouncedPreview();" />
+        <span class="char-count" id="titleCount">0 / 80</span>
+      </div>
+
+      <div class="field">
+        <label for="fSlug">Slug (filename) *</label>
+        <input type="text" id="fSlug" placeholder="my-post-title" />
+        <span class="field-hint">Used as the HTML filename, e.g. <code>my-post-title.html</code></span>
+      </div>
+
+      <div class="field">
+        <label for="fCategory">Category</label>
+        <select id="fCategory">
+          <option value="ai">AI &amp; Automation</option>
+          <option value="rcm">Revenue Cycle</option>
+          <option value="pm">Practice Management</option>
+          <option value="hr">Human Resources</option>
+          <option value="hl7">HL7 &amp; Integration</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="fDate">Publish Date</label>
+        <input type="date" id="fDate" />
+      </div>
+
+      <div class="field">
+        <label for="fReadTime">Read Time</label>
+        <input type="text" id="fReadTime" placeholder="8 min read" />
+      </div>
+
+      <div class="field">
+        <label>Tags</label>
+        <div class="tags-wrap" id="tagsWrap" onclick="document.getElementById('tagInput').focus()">
+          <input type="text" id="tagInput" class="tags-input" placeholder="Type tag + Enter…" />
+        </div>
+        <span class="field-hint">Press Enter or comma to add</span>
+      </div>
+
+      <div class="field">
+        <label for="fExcerpt">Excerpt / Meta Description *</label>
+        <textarea id="fExcerpt" placeholder="Short description shown in blog index and search results…" rows="3" oninput="updateCharCount('fExcerpt','excerptCount',160); debouncedPreview();"></textarea>
+        <span class="char-count" id="excerptCount">0 / 160</span>
+      </div>
+
+      <div class="field">
+        <label for="fKeywords">Meta Keywords</label>
+        <input type="text" id="fKeywords" placeholder="keyword1, keyword2…" />
+      </div>
+
+      <div class="field">
+        <label for="fAuthor">Author</label>
+        <input type="text" id="fAuthor" value="Orchard Medical Management" />
+      </div>
+
+      <!-- Markdown cheatsheet -->
+      <div style="margin-top:8px;">
+        <div class="sidebar-title"><i class="fas fa-book"></i> Markdown Guide</div>
+        <div class="md-ref">
+          <table>
+            <tr><td># Heading</td><td>H1</td></tr>
+            <tr><td>## Heading</td><td>H2</td></tr>
+            <tr><td>**bold**</td><td><strong>bold</strong></td></tr>
+            <tr><td>*italic*</td><td><em>italic</em></td></tr>
+            <tr><td>`code`</td><td>inline code</td></tr>
+            <tr><td>```…```</td><td>code block</td></tr>
+            <tr><td>&gt; text</td><td>blockquote</td></tr>
+            <tr><td>- item</td><td>bullet list</td></tr>
+            <tr><td>1. item</td><td>numbered list</td></tr>
+            <tr><td>[text](url)</td><td>link</td></tr>
+            <tr><td>---</td><td>divider</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center: Markdown Editor -->
+    <div class="editor-pane">
+      <div class="pane-header">
+        <div class="pane-header-left">
+          <i class="fas fa-code" style="color:var(--accent)"></i>
+          Markdown Editor
+          <span class="pane-badge" id="wordCount">0 words</span>
+        </div>
+        <div class="md-toolbar">
+          <button class="md-btn" title="Heading 2" onclick="insertMd('## ','')"><b>H2</b></button>
+          <button class="md-btn" title="Heading 3" onclick="insertMd('### ','')"><b>H3</b></button>
+          <span class="md-btn sep"></span>
+          <button class="md-btn" title="Bold" onclick="insertMd('**','**')"><b>B</b></button>
+          <button class="md-btn" title="Italic" onclick="insertMd('*','*')"><i>I</i></button>
+          <button class="md-btn" title="Code" onclick="insertMd('`','`')">{ }</button>
+          <span class="md-btn sep"></span>
+          <button class="md-btn" title="Link" onclick="insertLink()"><i class="fas fa-link fa-xs"></i></button>
+          <button class="md-btn" title="Blockquote" onclick="insertMd('> ','')"><i class="fas fa-quote-left fa-xs"></i></button>
+          <button class="md-btn" title="Bullet list" onclick="insertMd('- ','')"><i class="fas fa-list fa-xs"></i></button>
+          <button class="md-btn" title="Divider" onclick="insertMd('\n---\n','')">—</button>
+        </div>
+      </div>
+      <textarea id="mdEditor" placeholder="Start writing your post in Markdown…
+
+## Introduction
+Write your opening paragraph here.
+
+## Section Title
+Add your content…
+
+## Conclusion
+Wrap up the post."></textarea>
+    </div>
+
+    <!-- Right: Live Preview -->
+    <div class="preview-pane">
+      <div class="pane-header">
+        <div class="pane-header-left">
+          <i class="fas fa-eye" style="color:var(--accent)"></i>
+          Live Preview
+        </div>
+      </div>
+      <div class="preview-scroll">
+        <div class="preview-article" id="previewContent">
+          <div class="instructions">
+            <h3><i class="fas fa-lightbulb" style="color:var(--accent)"></i> How to use the Blog Writer</h3>
+            <ol style="padding-left:1.2rem;line-height:2;font-size:0.875rem;">
+              <li>Fill in the metadata on the left (title, category, date, tags)</li>
+              <li>Write your article in Markdown in the center editor</li>
+              <li>Preview updates live on the right as you type</li>
+              <li>Click <strong>Download HTML</strong> to export a complete, ready-to-deploy post</li>
+              <li>Move the downloaded file into the <code>blog/</code> folder</li>
+              <li>Add the post to <code>js/blog-data.js</code> so it appears on the blog index</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+  /* ── Simple Markdown Parser ── */
+  function parseMarkdown(md) {
+    if (!md) return '';
+    var lines = md.split('\n');
+    var html = '';
+    var inCode = false, codeLang = '', codeLines = [];
+    var inList = false, listType = '';
+    var inTable = false, tableRows = [];
+
+    function flushList() {
+      if (!inList) return;
+      html += '<' + listType + '>' + inList + '</' + listType + '>';
+      inList = false; listType = '';
+    }
+    function flushTable() {
+      if (!inTable) return;
+      var rows = tableRows;
+      tableRows = []; inTable = false;
+      var out = '<table>';
+      rows.forEach(function(row, i) {
+        var cells = row.split('|').map(function(c){return c.trim();}).filter(Boolean);
+        if (i === 1) return; // skip separator row
+        var tag = i === 0 ? 'th' : 'td';
+        out += '<tr>' + cells.map(function(c){return '<'+tag+'>'+c+'</'+tag+'>';}).join('') + '</tr>';
+      });
+      html += out + '</table>';
+    }
+
+    function inline(text) {
+      return text
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    }
+
+    lines.forEach(function(line) {
+      // Code block
+      if (line.startsWith('```')) {
+        if (!inCode) { inCode = true; codeLang = line.slice(3); codeLines = []; }
+        else {
+          inCode = false;
+          html += '<pre><code>' + codeLines.join('\n').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</code></pre>';
+        }
+        return;
+      }
+      if (inCode) { codeLines.push(line); return; }
+
+      // Table
+      if (line.includes('|') && line.trim().startsWith('|')) {
+        flushList();
+        inTable = true;
+        tableRows.push(line.trim().replace(/^\||\|$/g,''));
+        return;
+      } else if (inTable) { flushTable(); }
+
+      // Blank line
+      if (!line.trim()) { flushList(); html += '<br>'; return; }
+
+      // HR
+      if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) { flushList(); html += '<hr>'; return; }
+
+      // Headings
+      var hm = line.match(/^(#{1,4})\s+(.+)/);
+      if (hm) { flushList(); var hn='h'+hm[1].length; html+='<'+hn+'>'+inline(hm[2])+'</'+hn+'>'; return; }
+
+      // Blockquote
+      if (line.startsWith('> ')) { flushList(); html+='<blockquote><p>'+inline(line.slice(2))+'</p></blockquote>'; return; }
+
+      // Lists
+      var ulm = line.match(/^(\s*)[-*+]\s+(.+)/);
+      var olm = line.match(/^(\s*)\d+\.\s+(.+)/);
+      if (ulm) {
+        if (listType !== 'ul') { flushList(); listType='ul'; inList=''; }
+        inList += '<li>'+inline(ulm[2])+'</li>';
+        return;
+      }
+      if (olm) {
+        if (listType !== 'ol') { flushList(); listType='ol'; inList=''; }
+        inList += '<li>'+inline(olm[2])+'</li>';
+        return;
+      }
+
+      // Paragraph
+      flushList();
+      html += '<p>'+inline(line)+'</p>';
+    });
+
+    flushList(); flushTable();
+    return html;
+  }
+
+  /* ── State ── */
+  var tags = [];
+  var CATEGORY_LABELS = {
+    ai:  'AI &amp; Automation',
+    rcm: 'Revenue Cycle',
+    pm:  'Practice Management',
+    hr:  'Human Resources',
+    hl7: 'HL7 &amp; Integration',
+  };
+
+  /* ── Char count ── */
+  function updateCharCount(inputId, countId, max) {
+    var len = document.getElementById(inputId).value.length;
+    var el = document.getElementById(countId);
+    el.textContent = len + ' / ' + max;
+    el.classList.toggle('warn', len > max);
+  }
+
+  /* ── Word count ── */
+  function updateWordCount() {
+    var text = document.getElementById('mdEditor').value.trim();
+    var count = text ? text.split(/\s+/).length : 0;
+    document.getElementById('wordCount').textContent = count + ' word' + (count !== 1 ? 's' : '');
+  }
+
+  /* ── Auto-slug from title ── */
+  document.getElementById('fTitle').addEventListener('input', function() {
+    var slug = this.value.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim('-');
+    document.getElementById('fSlug').value = slug;
+  });
+
+  /* ── Tags ── */
+  var tagInput = document.getElementById('tagInput');
+  tagInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      addTag(this.value.trim().replace(/,$/, ''));
+      this.value = '';
+    } else if (e.key === 'Backspace' && !this.value && tags.length) {
+      removeTag(tags.length - 1);
+    }
+  });
+  function addTag(t) {
+    if (!t || tags.includes(t)) return;
+    tags.push(t);
+    renderTags();
+  }
+  function removeTag(i) {
+    tags.splice(i, 1);
+    renderTags();
+  }
+  function renderTags() {
+    var wrap = document.getElementById('tagsWrap');
+    wrap.querySelectorAll('.tag-chip').forEach(function(c){c.remove();});
+    tags.forEach(function(t, i) {
+      var chip = document.createElement('span');
+      chip.className = 'tag-chip';
+      chip.innerHTML = t + '<button onclick="removeTag(' + i + ')" aria-label="Remove tag">&times;</button>';
+      wrap.insertBefore(chip, tagInput);
+    });
+  }
+
+  /* ── Live preview ── */
+  var previewTimer;
+  function debouncedPreview() { clearTimeout(previewTimer); previewTimer = setTimeout(renderPreview, 200); }
+
+  function renderPreview() {
+    var title    = document.getElementById('fTitle').value || 'Untitled Post';
+    var cat      = document.getElementById('fCategory').value;
+    var date     = document.getElementById('fDate').value;
+    var md       = document.getElementById('mdEditor').value;
+    var dateStr  = date ? new Date(date + 'T12:00:00').toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}) : '';
+
+    var content = parseMarkdown(md);
+    var meta = '<div class="preview-meta">' +
+      '<span class="preview-tag">' + (CATEGORY_LABELS[cat] || cat) + '</span>' +
+      (dateStr ? '<span class="preview-date"><i class="fas fa-calendar" style="margin-right:4px;"></i>' + dateStr + '</span>' : '') +
+      '</div>';
+
+    document.getElementById('previewContent').innerHTML =
+      meta + '<h1>' + title + '</h1>' + content;
+    updateWordCount();
+  }
+
+  document.getElementById('mdEditor').addEventListener('input', debouncedPreview);
+  ['fCategory','fDate'].forEach(function(id) {
+    document.getElementById(id).addEventListener('change', renderPreview);
+  });
+
+  /* ── Toolbar helpers ── */
+  function insertMd(before, after) {
+    var ta = document.getElementById('mdEditor');
+    var s = ta.selectionStart, e = ta.selectionEnd;
+    var sel = ta.value.slice(s, e);
+    var newVal = ta.value.slice(0, s) + before + sel + after + ta.value.slice(e);
+    ta.value = newVal;
+    ta.selectionStart = ta.selectionEnd = s + before.length + sel.length + after.length;
+    ta.focus();
+    debouncedPreview();
+  }
+  function insertLink() {
+    var url = prompt('Enter URL:', 'https://');
+    if (!url) return;
+    var ta = document.getElementById('mdEditor');
+    var s = ta.selectionStart, e = ta.selectionEnd;
+    var sel = ta.value.slice(s, e) || 'Link text';
+    insertMd('[' + sel + '](' + url + ')', '');
+  }
+
+  /* ── Save / Load Draft ── */
+  function saveDraft() {
+    var draft = {
+      title:    document.getElementById('fTitle').value,
+      slug:     document.getElementById('fSlug').value,
+      category: document.getElementById('fCategory').value,
+      date:     document.getElementById('fDate').value,
+      readTime: document.getElementById('fReadTime').value,
+      tags:     tags.slice(),
+      excerpt:  document.getElementById('fExcerpt').value,
+      keywords: document.getElementById('fKeywords').value,
+      author:   document.getElementById('fAuthor').value,
+      body:     document.getElementById('mdEditor').value,
+    };
+    localStorage.setItem('omm-blog-draft', JSON.stringify(draft));
+    setStatus(true, 'Draft saved');
+    toast('Draft saved to browser storage');
+  }
+  function loadDraft() {
+    var raw = localStorage.getItem('omm-blog-draft');
+    if (!raw) { toast('No draft found'); return; }
+    var d = JSON.parse(raw);
+    document.getElementById('fTitle').value    = d.title    || '';
+    document.getElementById('fSlug').value     = d.slug     || '';
+    document.getElementById('fCategory').value = d.category || 'ai';
+    document.getElementById('fDate').value     = d.date     || '';
+    document.getElementById('fReadTime').value = d.readTime || '';
+    document.getElementById('fExcerpt').value  = d.excerpt  || '';
+    document.getElementById('fKeywords').value = d.keywords || '';
+    document.getElementById('fAuthor').value   = d.author   || '';
+    document.getElementById('mdEditor').value  = d.body     || '';
+    tags = d.tags || [];
+    renderTags();
+    renderPreview();
+    setStatus(true, 'Draft loaded');
+    toast('Draft loaded');
+  }
+  function setStatus(saved, text) {
+    document.getElementById('statusDot').className = 'status-dot' + (saved ? ' saved' : '');
+    document.getElementById('statusText').textContent = text;
+  }
+
+  /* ── Toast ── */
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(function() { el.classList.remove('show'); }, 2400);
+  }
+
+  /* ── HTML Generator ── */
+  function downloadHTML() {
+    var title    = document.getElementById('fTitle').value.trim();
+    var slug     = document.getElementById('fSlug').value.trim();
+    var cat      = document.getElementById('fCategory').value;
+    var catLabel = CATEGORY_LABELS[cat] || cat;
+    var date     = document.getElementById('fDate').value || new Date().toISOString().slice(0,10);
+    var readTime = document.getElementById('fReadTime').value || '5 min read';
+    var excerpt  = document.getElementById('fExcerpt').value.trim();
+    var keywords = document.getElementById('fKeywords').value.trim();
+    var author   = document.getElementById('fAuthor').value.trim() || 'Orchard Medical Management';
+    var body     = document.getElementById('mdEditor').value;
+    var dateObj  = new Date(date + 'T12:00:00');
+    var dateLabel= dateObj.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var tagList  = tags.map(function(t){return '<span class="article-tag">'+t+'</span>';}).join('');
+
+    if (!title || !slug) { toast('Please fill in Title and Slug'); return; }
+
+    var bodyHtml = parseMarkdown(body);
+
+    /* Build related posts from blog-data (2 from same category) */
+    var relatedScript = '';
+
+    var fullHTML = '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
+      '  <meta charset="UTF-8" />\n' +
+      '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n' +
+      '  <title>' + title + ' | OMM Blog</title>\n' +
+      '  <meta name="description" content="' + excerpt.replace(/"/g,'&quot;') + '" />\n' +
+      (keywords ? '  <meta name="keywords" content="' + keywords + '" />\n' : '') +
+      '  <link rel="canonical" href="https://orchardmedicalmgt.com/blog/' + slug + '/" />\n' +
+      '  <meta property="og:type" content="article" />\n' +
+      '  <meta property="og:url" content="https://orchardmedicalmgt.com/blog/' + slug + '/" />\n' +
+      '  <meta property="og:title" content="' + title.replace(/"/g,'&quot;') + '" />\n' +
+      '  <meta property="og:description" content="' + excerpt.replace(/"/g,'&quot;') + '" />\n' +
+      '  <link rel="preconnect" href="https://fonts.googleapis.com" />\n' +
+      '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n' +
+      '  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />\n' +
+      '  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />\n' +
+      '  <link rel="stylesheet" href="../css/style.css" />\n' +
+      '  <script type="application/ld+json">\n' +
+      '  {\n' +
+      '    "@context": "https://schema.org",\n' +
+      '    "@type": "BlogPosting",\n' +
+      '    "headline": "' + title.replace(/"/g,'\\"') + '",\n' +
+      '    "description": "' + excerpt.replace(/"/g,'\\"') + '",\n' +
+      '    "datePublished": "' + date + '",\n' +
+      '    "author": {"@type": "Organization", "name": "' + author + '"},\n' +
+      '    "publisher": {"@type": "Organization", "name": "Orchard Medical Management"},\n' +
+      '    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://orchardmedicalmgt.com/blog/' + slug + '/"}\n' +
+      '  }\n' +
+      '  <\/script>\n' +
+      '</head>\n<body>\n\n' +
+      '  <div id="site-nav"></div>\n\n' +
+      '  <main>\n' +
+      '    <!-- POST HERO -->\n' +
+      '    <section class="page-hero post-hero">\n' +
+      '      <div class="page-hero-bg" aria-hidden="true"></div>\n' +
+      '      <div class="container">\n' +
+      '        <div class="post-hero-meta">\n' +
+      '          <span class="blog-tag">' + catLabel + '</span>\n' +
+      '          <span class="post-hero-read"><i class="fas fa-clock" aria-hidden="true"></i> ' + readTime + '</span>\n' +
+      '        </div>\n' +
+      '        <h1 class="page-hero-heading">' + title + '</h1>\n' +
+      '        <div class="post-hero-author">\n' +
+      '          <div class="author-avatar"><i class="fas fa-building-columns" aria-hidden="true"></i></div>\n' +
+      '          <div>\n' +
+      '            <span class="author-name">' + author + '</span>\n' +
+      '            <span class="author-date">' + dateLabel + '</span>\n' +
+      '          </div>\n' +
+      '        </div>\n' +
+      '      </div>\n' +
+      '    </section>\n\n' +
+      '    <!-- ARTICLE -->\n' +
+      '    <section class="article-section section-padding">\n' +
+      '      <div class="container article-layout">\n' +
+      '        <article class="article-body">\n' +
+      bodyHtml + '\n' +
+      '          <!-- Tags -->\n' +
+      '          <div class="article-tags" style="margin-top:var(--space-10);padding-top:var(--space-6);border-top:1px solid var(--color-border)">\n' +
+      '            ' + tagList + '\n' +
+      '          </div>\n' +
+      '          <!-- CTA -->\n' +
+      '          <div class="article-cta-block">\n' +
+      '            <h3>Ready to take your practice further?</h3>\n' +
+      '            <p>OMM has been helping New Hampshire private practices maximize revenue and streamline operations since 2004. Let\'s talk about your goals.</p>\n' +
+      '            <a href="../contact.html" class="btn-primary">Get In Touch <i class="fas fa-arrow-right" aria-hidden="true"></i></a>\n' +
+      '          </div>\n' +
+      '        </article>\n' +
+      '        <aside class="sidebar">\n' +
+      '          <div class="sidebar-widget sidebar-cta">\n' +
+      '            <h4 class="sidebar-widget-title">Get Expert Help</h4>\n' +
+      '            <p>Our team is ready to help your practice win. No obligation — just a conversation.</p>\n' +
+      '            <a href="../contact.html" class="btn-primary" style="width:100%;justify-content:center;">Contact OMM <i class="fas fa-arrow-right" aria-hidden="true"></i></a>\n' +
+      '          </div>\n' +
+      '          <div class="sidebar-widget">\n' +
+      '            <h4 class="sidebar-widget-title">Our Services</h4>\n' +
+      '            <ul class="sidebar-links">\n' +
+      '              <li><a href="../services.html#rcm">Revenue Cycle Management</a></li>\n' +
+      '              <li><a href="../services.html#pm">Practice Management</a></li>\n' +
+      '              <li><a href="../services.html#hr">Human Resources</a></li>\n' +
+      '              <li><a href="../services.html#cred">Credentialing</a></li>\n' +
+      '              <li><a href="../services.html#patriot-pay">Patriot Pay</a></li>\n' +
+      '              <li><a href="../ai-automation.html">AI &amp; Automation</a></li>\n' +
+      '            </ul>\n' +
+      '          </div>\n' +
+      '        </aside>\n' +
+      '      </div>\n' +
+      '    </section>\n' +
+      '  </main>\n\n' +
+      '  <div id="site-footer"></div>\n\n' +
+      '  <script src="../js/components.js" data-depth="1" defer><\/script>\n' +
+      '  <script src="../js/main.js"><\/script>\n' +
+      '  <script src="../js/chatbot.js"><\/script>\n' +
+      '</body>\n</html>';
+
+    /* Trigger download */
+    var blob = new Blob([fullHTML], { type: 'text/html' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = slug + '.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('Downloaded: ' + slug + '.html — move it to the blog/ folder');
+    setStatus(true, 'Exported');
+
+    /* Show reminder */
+    setTimeout(function() {
+      toast('Remember to add this post to js/blog-data.js!');
+    }, 3000);
+  }
+
+  /* ── Auto-save draft every 60s ── */
+  setInterval(function() {
+    if (document.getElementById('mdEditor').value) {
+      saveDraft();
+      setStatus(true, 'Auto-saved');
+    }
+  }, 60000);
+
+  /* ── Set today's date as default ── */
+  document.getElementById('fDate').value = new Date().toISOString().slice(0, 10);
+
+  /* ── Mark unsaved on any change ── */
+  ['fTitle','fSlug','fCategory','fDate','fReadTime','fExcerpt','fKeywords','fAuthor','mdEditor'].forEach(function(id) {
+    document.getElementById(id).addEventListener('input', function() {
+      setStatus(false, 'Unsaved changes');
+    });
+  });
+
+  </script>
+</body>
+</html>

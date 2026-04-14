@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/blog/" />
+  <title>Medical Practice Management Blog | RCM, AI Automation &amp; HL7 Integration | OMM</title>
+  <meta name="description" content="Expert guides on revenue cycle management best practices, AI automation in healthcare, HL7 &amp; FHIR integration, medical billing, and credentialing — from OMM's New Hampshire specialists." />
+  <meta name="keywords" content="medical practice management blog, revenue cycle management best practices, AI healthcare automation guide, HL7 FHIR integration guide, medical billing resources, practice management insights, healthcare credentialing guide, medical practice management trends" />
+  <link rel="canonical" href="https://orchardmedicalmgt.com/blog/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://orchardmedicalmgt.com/blog/" />
+  <meta property="og:title" content="Medical Practice Management Blog | OMM Resources" />
+  <meta property="og:description" content="Expert insights on RCM, AI automation, HL7 integration, billing, and credentialing from NH's leading medical practice management team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Orchard Medical Management Blog",
+    "url": "https://orchardmedicalmgt.com/blog/",
+    "description": "Expert insights on medical practice management, revenue cycle, AI automation, and healthcare operations.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Orchard Medical Management",
+      "url": "https://orchardmedicalmgt.com",
+      "logo": {"@type": "ImageObject", "url": "https://orchardmedicalmgt.com/wp-content/uploads/2025/10/OMM_new-logo.png"}
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="navbar navbar--solid" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="Orchard Medical Management Home">
+        <img src="../images/omm-logo.png" alt="Orchard Medical Management Logo" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../ai-automation.html">AI &amp; Automation</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="index.html" class="active">Blog</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="tel:6032324513" class="nav-phone"><i class="fas fa-phone-alt" aria-hidden="true"></i>(603) 232-4513</a>
+        <a href="../contact.html" class="btn-primary btn-sm">Get Started</a>
+        <button class="theme-toggle" aria-label="Switch to dark mode" title="Toggle dark/light mode"></button>
+      </div>
+      <button class="hamburger" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../ai-automation.html">AI &amp; Automation</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="index.html">Blog</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <a href="tel:6032324513" class="mobile-phone">(603) 232-4513</a>
+      <a href="../contact.html" class="btn-primary mobile-menu-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="page-hero-bg" aria-hidden="true"></div>
+      <div class="page-hero-grid" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          <span>Blog</span>
+        </nav>
+        <h1 id="pageHeroH1" aria-label="Resources & Insights for Healthcare Practices"></h1>
+        <p>Expert guidance on revenue cycle management, AI automation, HL7 integration, billing best practices, and everything in between — from OMM&rsquo;s team of specialists.</p>
+      </div>
+    </section>
+
+    <!-- BLOG LISTING -->
+    <section class="blog-section section-padding">
+      <div class="container">
+        <!-- Filters -->
+        <div class="blog-filters" role="toolbar" aria-label="Filter blog posts">
+          <button class="blog-filter-btn active" data-filter="all">All Posts</button>
+          <button class="blog-filter-btn" data-filter="rcm">Revenue Cycle</button>
+          <button class="blog-filter-btn" data-filter="ai">AI &amp; Automation</button>
+          <button class="blog-filter-btn" data-filter="hl7">HL7 &amp; Integration</button>
+          <button class="blog-filter-btn" data-filter="practice">Practice Management</button>
+          <button class="blog-filter-btn" data-filter="credentialing">Credentialing</button>
+        </div>
+
+        <!-- Featured Post -->
+        <div style="margin-bottom:var(--space-12);">
+          <a href="employer-benefits-healthcare-practices.html" class="featured-post-card" style="display:block;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden;position:relative;text-decoration:none;transition:transform var(--transition-base),box-shadow var(--transition-base);" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 70% 50%,rgba(37,99,235,0.05) 0%,transparent 70%);pointer-events:none;"></div>
+            <div style="padding:var(--space-12);position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-10);align-items:center;">
+              <div>
+                <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-5);">
+                  <span class="blog-tag">Latest</span>
+                  <span class="blog-tag">Practice Management</span>
+                </div>
+                <h2 style="font-size:var(--text-3xl);font-weight:var(--font-bold);color:var(--color-dark);line-height:1.2;letter-spacing:-0.02em;margin-bottom:var(--space-4);">Why Employer Benefits Are the Secret Weapon for Healthcare Practices in Manchester, NH</h2>
+                <p style="font-size:var(--text-lg);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-6);">Healthcare cost increases are projected at 6–10% in 2026 and 90% of employees experience burnout. Here&rsquo;s how competitive benefits packages help NH practices recruit, retain, and build resilient teams.</p>
+                <div style="display:flex;align-items:center;gap:var(--space-5);flex-wrap:wrap;">
+                  <span style="font-size:var(--text-sm);color:var(--color-text-muted);display:flex;align-items:center;gap:var(--space-2);"><i class="fas fa-calendar" aria-hidden="true"></i> April 2, 2026</span>
+                  <span style="font-size:var(--text-sm);color:var(--color-text-muted);display:flex;align-items:center;gap:var(--space-2);"><i class="fas fa-clock" aria-hidden="true"></i> 8 min read</span>
+                </div>
+              </div>
+              <div style="background:var(--color-white);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-8);display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-heart-pulse" style="font-size:5rem;color:var(--color-accent);opacity:0.35;"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="blog-grid">
+
+          <!-- Post 1 -->
+          <article class="blog-card" data-category="rcm">
+            <div class="blog-card-img"><i class="fas fa-chart-line blog-card-img-icon" aria-hidden="true"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">Revenue Cycle</span>
+                <span class="blog-date">March 28, 2025</span>
+              </div>
+              <h2 class="blog-card-title"><a href="revenue-cycle-management-best-practices.html">10 Revenue Cycle Management Best Practices Every Private Practice Should Follow</a></h2>
+              <p class="blog-card-excerpt">From clean claim rates to denial management workflows, these evidence-based practices consistently improve cash flow and reduce days in accounts receivable for independent medical practices.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 9 min read</span>
+                <a href="revenue-cycle-management-best-practices.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 2 -->
+          <article class="blog-card" data-category="ai">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#1e1b4b,#1e3a8a);"><i class="fas fa-robot blog-card-img-icon" aria-hidden="true" style="color:rgba(147,197,253,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">AI &amp; Automation</span>
+                <span class="blog-date">April 10, 2025</span>
+              </div>
+              <h2 class="blog-card-title"><a href="ai-automation-healthcare-guide.html">The Complete Guide to AI Automation in Medical Practice Management</a></h2>
+              <p class="blog-card-excerpt">AI calling agents, automated billing, HL7 integration, and intelligent scheduling are transforming private practices. Here&rsquo;s your comprehensive guide to evaluating and implementing each solution.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 12 min read</span>
+                <a href="ai-automation-healthcare-guide.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 3 -->
+          <article class="blog-card" data-category="hl7">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#064e3b,#065f46);"><i class="fas fa-network-wired blog-card-img-icon" aria-hidden="true" style="color:rgba(52,211,153,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">HL7 &amp; Integration</span>
+                <span class="blog-date">March 15, 2025</span>
+              </div>
+              <h2 class="blog-card-title"><a href="hl7-fhir-integration-guide.html">HL7 &amp; FHIR Integration: A Complete Guide for Medical Practices</a></h2>
+              <p class="blog-card-excerpt">Understanding HL7 messaging standards and FHIR APIs is critical to modern healthcare interoperability. This guide explains what practices need to know and how to choose the right integration approach.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 10 min read</span>
+                <a href="hl7-fhir-integration-guide.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 4 — from live site -->
+          <article class="blog-card" data-category="rcm">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#1e3a5f,#1e40af);"><i class="fas fa-file-invoice-dollar blog-card-img-icon" aria-hidden="true" style="color:rgba(147,197,253,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">Revenue Cycle</span>
+                <span class="blog-date">March 3, 2026</span>
+              </div>
+              <h2 class="blog-card-title"><a href="revenue-cycle-management-2026.html">Revenue Cycle Management in 2026: What Every Manchester, NH Private Practice Needs to Know</a></h2>
+              <p class="blog-card-excerpt">Claim denial rates hit 10–15%, prior auth requirements up 30%, and CMS reimbursements cut. Here&rsquo;s what 2026 means for your revenue cycle and how to stay ahead.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 9 min read</span>
+                <a href="revenue-cycle-management-2026.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 5 — from live site -->
+          <article class="blog-card" data-category="practice">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#14532d,#166534);"><i class="fas fa-cart-shopping blog-card-img-icon" aria-hidden="true" style="color:rgba(134,239,172,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">Practice Management</span>
+                <span class="blog-date">February 4, 2026</span>
+              </div>
+              <h2 class="blog-card-title"><a href="healthcare-purchasing-solutions.html">Healthcare Purchasing Solutions for Medical Practices</a></h2>
+              <p class="blog-card-excerpt">Independent practices routinely overpay on supplies and vendor contracts. Learn how strategic purchasing, vendor consolidation, and ongoing oversight cut costs without cutting care quality.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 7 min read</span>
+                <a href="healthcare-purchasing-solutions.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 6 — from live site -->
+          <article class="blog-card" data-category="practice">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#3b0764,#4c1d95);"><i class="fas fa-credit-card blog-card-img-icon" aria-hidden="true" style="color:rgba(196,181,253,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">Practice Management</span>
+                <span class="blog-date">January 2, 2026</span>
+              </div>
+              <h2 class="blog-card-title"><a href="payment-processing-costs-medical-practices.html">Enhancing Operational Efficiency by Reducing Payment Processing Costs</a></h2>
+              <p class="blog-card-excerpt">Credit card fees of 2–4% per transaction cost practices tens of thousands annually. OMM helps Manchester NH practices eliminate processing fees with no upfront equipment costs.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 7 min read</span>
+                <a href="payment-processing-costs-medical-practices.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 7 — from live site -->
+          <article class="blog-card" data-category="practice">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#431407,#7c2d12);"><i class="fas fa-chart-pie blog-card-img-icon" aria-hidden="true" style="color:rgba(253,186,116,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">Practice Management</span>
+                <span class="blog-date">December 1, 2025</span>
+              </div>
+              <h2 class="blog-card-title"><a href="financial-management-budgeting-medical-practices.html">Financial Management and Budgeting for Medical Practices</a></h2>
+              <p class="blog-card-excerpt">Strategic financial oversight — from annual budgeting and cash flow tracking to service line profitability and staffing cost modeling. Strengthen your practice&rsquo;s financial foundation for 2026.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 8 min read</span>
+                <a href="financial-management-budgeting-medical-practices.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 8 — from live site -->
+          <article class="blog-card" data-category="practice">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);"><i class="fas fa-user-plus blog-card-img-icon" aria-hidden="true" style="color:rgba(125,211,252,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">Practice Management</span>
+                <span class="blog-date">November 3, 2025</span>
+              </div>
+              <h2 class="blog-card-title"><a href="patient-acquisition-strategies-private-practices.html">Patient Acquisition Strategies That Work: How Private Practices Can Compete and Grow</a></h2>
+              <p class="blog-card-excerpt">Growing a private practice requires more than marketing. From seamless front-end workflows to up-to-date credentialing, here are 6 operational strategies that drive sustainable patient growth.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 9 min read</span>
+                <a href="patient-acquisition-strategies-private-practices.html" class="blog-read-more">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Coming Soon Placeholder 1 -->
+          <article class="blog-card" data-category="credentialing" style="opacity:0.65;">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#1a1a2e,#16213e);"><i class="fas fa-id-card-clip blog-card-img-icon" aria-hidden="true" style="color:rgba(167,139,250,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">Credentialing</span>
+                <span class="blog-date">Coming Soon</span>
+              </div>
+              <h2 class="blog-card-title">Medical Credentialing 101: Timeline, Requirements &amp; Provider Enrollment Process</h2>
+              <p class="blog-card-excerpt">A step-by-step guide to provider credentialing — from CAQH registration and NPI enrollment to payer contracting and re-credentialing timelines every practice administrator should know.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 8 min read</span>
+                <span class="blog-read-more" style="color:var(--color-text-muted);">Coming Soon</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Coming Soon Placeholder 2 -->
+          <article class="blog-card" data-category="ai" style="opacity:0.65;">
+            <div class="blog-card-img" style="background:linear-gradient(135deg,#0f172a,#1e293b);"><i class="fas fa-phone-volume blog-card-img-icon" aria-hidden="true" style="color:rgba(96,165,250,0.5);"></i><div class="blog-card-img-overlay"></div></div>
+            <div class="blog-card-body">
+              <div class="blog-card-meta">
+                <span class="blog-tag">AI &amp; Automation</span>
+                <span class="blog-date">Coming Soon</span>
+              </div>
+              <h2 class="blog-card-title">AI Calling Agents in Healthcare: How Automated Patient Outreach Reduces No-Shows by 40%</h2>
+              <p class="blog-card-excerpt">AI voice agents are changing how practices communicate with patients. We break down the technology, real-world results, and implementation considerations.</p>
+              <div class="blog-card-footer">
+                <span class="blog-read-time"><i class="fas fa-clock" aria-hidden="true"></i> 8 min read</span>
+                <span class="blog-read-more" style="color:var(--color-text-muted);">Coming Soon</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Add New Post Instructions (HTML Comment — visible to developers only) -->
+        <!--
+          ============================================================
+          HOW TO ADD A NEW BLOG POST
+          ============================================================
+          1. Create a new HTML file in this /blog/ folder.
+             Recommended naming: use-lowercase-hyphens.html
+             e.g.: automated-patient-scheduling-guide.html
+
+          2. Copy the template from any existing post file.
+             Best template to copy: revenue-cycle-management-best-practices.html
+
+          3. Update in the copied file:
+             - <title> tag
+             - <meta name="description"> tag
+             - <link rel="canonical">
+             - The BlogPosting schema in <script type="application/ld+json">
+             - The <h1> in the article header
+             - All article content
+             - The "Related Posts" links at the bottom
+
+          4. Add the post card to THIS file (blog/index.html):
+             - Copy one of the <article class="blog-card"> blocks above
+             - Set the correct data-category (rcm / ai / hl7 / practice / credentialing)
+             - Update the title, excerpt, date, read time, and href links
+             - Remove the style="opacity:0.7;" from placeholder cards
+             - Remove the "Coming Soon" text, replace with "Read More" link
+
+          5. Update sitemap.xml to include the new post URL.
+
+          Categories available:
+          - rcm          → Revenue Cycle Management posts
+          - ai           → AI & Automation posts
+          - hl7          → HL7 & Integration posts
+          - practice     → Practice Management posts
+          - credentialing → Credentialing posts
+          ============================================================
+        -->
+
+      </div>
+    </section>
+
+    <!-- Newsletter / CTA -->
+    <section class="cta-section">
+      <div class="cta-bg" aria-hidden="true"></div>
+      <div class="container cta-content">
+        <h2 class="cta-heading">Get OMM Insights Delivered Monthly</h2>
+        <p class="cta-subtext">Our monthly AI-generated practice reports are available to clients. Want to see what data-driven practice management looks like?</p>
+        <div class="cta-actions">
+          <a href="../contact.html" class="btn-primary btn-lg">Request a Sample Report <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          <a href="../ai-automation.html" class="btn-outline">Explore AI Services</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo"><img src="../images/omm-logo.png" alt="Orchard Medical Management" /></a>
+        <p class="footer-tagline">Fortifying private practices through AI-powered financial and operational excellence since 2004.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/orchard-medical-management-llc/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/people/Orchard-Medical-Management/61584795752793/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h3 class="footer-col-heading">Services</h3><ul class="footer-links"><li><a href="../services.html#rcm">Revenue Cycle Management</a></li><li><a href="../services.html#pm">Practice Management</a></li><li><a href="../services.html#hr">Human Resources</a></li><li><a href="../services.html#cred">Credentialing</a></li><li><a href="../ai-automation.html">AI &amp; Automation</a></li></ul></div>
+      <div class="footer-col"><h3 class="footer-col-heading">Company</h3><ul class="footer-links"><li><a href="../index.html">Home</a></li><li><a href="../about.html">About OMM</a></li><li><a href="index.html">Blog</a></li><li><a href="../contact.html#careers">Careers</a></li><li><a href="../contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h3 class="footer-col-heading">Contact</h3><address class="footer-address"><p><a href="tel:6032324513">(603) 232-4513</a></p><p>Manchester, NH</p></address><a href="../contact.html" class="btn-primary btn-sm">Get In Touch</a></div>
+    </div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="footer-copy">&copy; <span id="year"></span> Orchard Medical Management LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><span>&middot;</span><a href="../terms-of-use.html">Terms of Use</a></div></div></div>
+  </footer>
+  <script src="../js/main.js"></script>
+  <script>
+  (function(){
+    var h1 = document.getElementById('pageHeroH1');
+    if (!h1) return;
+    var CHAR_MS=40, DELETE_MS=22, LINE_GAP=360, END_PAUSE=2400, START_PAUSE=500;
+    var segs = [
+      { text:'Resources & Insights for Healthcare ', accent:false, isLineEnd:false },
+      { text:'Practices', accent:true, isLineEnd:false }
+    ];
+    segs.forEach(function(seg){
+      var s=document.createElement('span');
+      if(seg.accent) s.className='hero-heading-accent';
+      seg.el=s; h1.appendChild(s);
+      if(seg.isLineEnd) h1.appendChild(document.createElement('br'));
+    });
+    function setActive(i){ segs.forEach(function(s){ s.el.classList.remove('typing-active'); }); if(i>=0&&i<segs.length) segs[i].el.classList.add('typing-active'); }
+    var si=0, ci=0;
+    function typeNext(){ if(si>=segs.length){ setTimeout(beginDelete,END_PAUSE); return; } setActive(si); var seg=segs[si]; if(ci<seg.text.length){ seg.el.textContent+=seg.text[ci++]; setTimeout(typeNext,CHAR_MS); } else { var prev=si++; ci=0; setTimeout(typeNext,segs[prev].isLineEnd?LINE_GAP:0); } }
+    function beginDelete(){ si=segs.length-1; ci=segs[si].el.textContent.length; deleteNext(); }
+    function deleteNext(){ setActive(si); var seg=segs[si]; if(ci>0){ seg.el.textContent=seg.el.textContent.slice(0,--ci); setTimeout(deleteNext,DELETE_MS); } else if(si>0){ si--; ci=segs[si].el.textContent.length; setTimeout(deleteNext,DELETE_MS); } else { si=0;ci=0; setTimeout(typeNext,START_PAUSE); } }
+    setTimeout(typeNext,400);
+  }());
+  </script>
+  <script src="../js/chatbot.js"></script>
+</body>
+</html>

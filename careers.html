@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="0; url=contact.html#careers" />
+  <base href="/" />
+  <title>Careers at Orchard Medical Management | Join Our Team | Manchester, NH</title>
+  <meta name="description" content="Build your career at Orchard Medical Management — a growing AI-powered medical practice management company in Manchester, NH. Explore open roles and apply today." />
+  <meta name="keywords" content="careers Orchard Medical Management, medical billing jobs Manchester NH, healthcare jobs New Hampshire, revenue cycle management jobs NH, practice management careers, medical coding jobs" />
+  <link rel="canonical" href="https://orchardmedicalmgt.com/careers/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://orchardmedicalmgt.com/careers/" />
+  <meta property="og:title" content="Careers at OMM | Join Our Team | Manchester, NH" />
+  <meta property="og:description" content="Join Orchard Medical Management and help shape the future of healthcare practice management. Open roles in RCM, technology, operations, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── CAREERS PAGE STYLES ── */
+
+    /* Centered single-column form layout */
+    .careers-section { background: var(--color-bg); }
+    .careers-form-center {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Phone row: country code select + number input side by side */
+    .phone-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--space-3);
+    }
+    @media (max-width: 480px) {
+      .phone-row { grid-template-columns: 1fr; }
+    }
+
+    /* Application form card */
+    .careers-form-wrap {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10);
+      box-shadow: var(--shadow-md);
+    }
+    .careers-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .careers-form-title {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      color: var(--color-dark);
+      margin-bottom: var(--space-1);
+    }
+    .careers-form-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    /* Styled file upload drop zone */
+    .file-upload-zone {
+      position: relative;
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      padding: var(--space-8) var(--space-6);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .file-upload-zone:hover,
+    .file-upload-zone.dragover {
+      border-color: var(--color-accent);
+      background: var(--color-accent-light);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .file-upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    .file-upload-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-md);
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--text-xl);
+      pointer-events: none;
+    }
+    .file-upload-text { pointer-events: none; }
+    .file-upload-text strong {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: var(--font-semibold);
+      color: var(--color-dark);
+      margin-bottom: var(--space-1);
+    }
+    .file-upload-text span {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+    .file-upload-name {
+      font-size: var(--text-xs);
+      color: var(--color-accent);
+      font-weight: var(--font-semibold);
+      pointer-events: none;
+      display: none;
+    }
+    .file-upload-name.visible { display: block; }
+
+    /* Success message */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-12) var(--space-6);
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-5);
+    }
+    .form-success.visible { display: flex; }
+    .success-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--color-green-bg);
+      color: var(--color-green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--text-3xl);
+    }
+    .success-heading {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      color: var(--color-dark);
+    }
+    .success-body {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      max-width: 400px;
+    }
+
+    /* Responsive overrides */
+    @media (max-width: 768px) {
+      .careers-form-wrap { padding: var(--space-6); }
+    }
+    @media (max-width: 480px) {
+      .careers-form-wrap { padding: var(--space-5); }
+    }
+    /* Force submit button content to center */
+    #careersForm button[type="submit"] {
+      display: flex !important;
+      width: 100%;
+      justify-content: center !important;
+      align-items: center;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar navbar--solid" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Orchard Medical Management Home">
+        <img src="images/omm-logo.png" alt="Orchard Medical Management Logo" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="ai-automation.html">AI &amp; Automation</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="tel:6032324513" class="nav-phone"><i class="fas fa-phone-alt" aria-hidden="true"></i>(603) 232-4513</a>
+        <a href="contact.html" class="btn-primary btn-sm">Get Started</a>
+        <button class="theme-toggle" aria-label="Switch to dark mode" title="Toggle dark/light mode"></button>
+      </div>
+      <button class="hamburger" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="ai-automation.html">AI &amp; Automation</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="tel:6032324513" class="mobile-phone">(603) 232-4513</a>
+      <a href="contact.html" class="btn-primary mobile-menu-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── PAGE HERO ── -->
+    <section class="page-hero">
+      <div class="page-hero-bg" aria-hidden="true"></div>
+      <div class="page-hero-grid" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          <span>Careers</span>
+        </nav>
+        <h1>Join the OMM Team</h1>
+        <p>We&rsquo;re always looking for talented, driven people who are passionate about healthcare. If you think you&rsquo;d be a great fit at Orchard Medical Management, we&rsquo;d love to hear from you.</p>
+      </div>
+    </section>
+
+    <!-- ── APPLICATION FORM ── -->
+    <section class="careers-section section-padding" id="apply">
+      <div class="container">
+        <div class="careers-form-center">
+
+          <div class="section-header sr" style="text-align:left; margin-bottom: var(--space-8);">
+            <span class="section-label">Work With Us</span>
+            <h2 class="section-heading" style="font-size: var(--text-3xl);">Submit Your Application</h2>
+            <p class="section-subheading" style="margin:0;">Fill in your details below and attach your resume. We review every submission personally and will be in touch if there&rsquo;s a fit.</p>
+          </div>
+
+          <div class="careers-form-wrap sr sr--delay-1" id="application-form">
+
+            <!-- Success state -->
+            <div class="form-success" id="formSuccess" aria-live="polite">
+              <div class="success-icon"><i class="fas fa-check" aria-hidden="true"></i></div>
+              <h3 class="success-heading">Application Received!</h3>
+              <p class="success-body" id="successMessage">Thank you for reaching out. We&rsquo;ll review your application and be in touch within 5&ndash;7 business days.</p>
+            </div>
+
+            <!-- Form -->
+            <div id="formContainer">
+              <form class="careers-form" id="careersForm" enctype="multipart/form-data" novalidate>
+
+                <!-- First + Last Name row -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName" class="form-label">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Jane" required autocomplete="given-name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName" class="form-label">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Smith" required autocomplete="family-name" />
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address *</label>
+                  <input type="email" id="email" name="email" class="form-input" placeholder="jane@example.com" required autocomplete="email" />
+                </div>
+
+                <!-- Phone with country code -->
+                <div class="form-group">
+                  <label class="form-label">Phone Number *</label>
+                  <div class="phone-row">
+                    <select id="countryCode" name="countryCode" class="form-input form-select" required aria-label="Country code">
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+1-CA">🇨🇦 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+61">🇦🇺 +61</option>
+                      <option value="+91">🇮🇳 +91</option>
+                      <option value="+92">🇵🇰 +92</option>
+                      <option value="+971">🇦🇪 +971</option>
+                      <option value="+966">🇸🇦 +966</option>
+                      <option value="+55">🇧🇷 +55</option>
+                      <option value="+52">🇲🇽 +52</option>
+                      <option value="+49">🇩🇪 +49</option>
+                      <option value="+33">🇫🇷 +33</option>
+                      <option value="+39">🇮🇹 +39</option>
+                      <option value="+34">🇪🇸 +34</option>
+                      <option value="+81">🇯🇵 +81</option>
+                      <option value="+86">🇨🇳 +86</option>
+                      <option value="+82">🇰🇷 +82</option>
+                      <option value="+62">🇮🇩 +62</option>
+                      <option value="+234">🇳🇬 +234</option>
+                      <option value="+27">🇿🇦 +27</option>
+                    </select>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="603-232-4513" required autocomplete="tel-national" />
+                  </div>
+                </div>
+
+                <!-- Cover Letter -->
+                <div class="form-group">
+                  <label for="coverLetter" class="form-label">Cover Letter</label>
+                  <textarea id="coverLetter" name="coverLetter" class="form-input form-textarea" rows="5" placeholder="Tell us a bit about yourself and why you&apos;re interested in working at OMM..."></textarea>
+                </div>
+
+                <!-- Resume Upload -->
+                <div class="form-group">
+                  <label class="form-label" id="resumeLabel">Resume *</label>
+                  <div class="file-upload-zone" id="fileUploadZone" role="button" aria-labelledby="resumeLabel" tabindex="0">
+                    <input
+                      type="file"
+                      id="resume"
+                      name="resume"
+                      accept=".pdf,.doc,.docx"
+                      required
+                      aria-required="true"
+                    />
+                    <div class="file-upload-icon" aria-hidden="true">
+                      <i class="fas fa-cloud-arrow-up"></i>
+                    </div>
+                    <div class="file-upload-text">
+                      <strong>Click to browse or drag &amp; drop</strong>
+                      <span>PDF, DOC, or DOCX &mdash; max 10 MB</span>
+                    </div>
+                    <span class="file-upload-name" id="fileUploadName" aria-live="polite"></span>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn-primary btn-lg form-submit">
+                  Submit Application <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer" id="resources">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="Orchard Medical Management">
+          <img src="images/omm-logo.png" alt="Orchard Medical Management" />
+        </a>
+        <p class="footer-tagline">Fortifying private practices through AI-powered financial and operational excellence since 2004.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/orchard-medical-management-llc/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/people/Orchard-Medical-Management/61584795752793/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col-heading">Services</h3>
+        <ul class="footer-links" role="list">
+          <li><a href="services.html#rcm">Revenue Cycle Management</a></li>
+          <li><a href="services.html#pm">Practice Management</a></li>
+          <li><a href="services.html#hr">Human Resources</a></li>
+          <li><a href="services.html#cred">Credentialing</a></li>
+          <li><a href="ai-automation.html#calling">AI Calling Agent</a></li>
+          <li><a href="ai-automation.html#hl7">HL7 Integration</a></li>
+          <li><a href="ai-automation.html#scheduling">Automated Scheduling</a></li>
+          <li><a href="ai-automation.html#insights">AI Practice Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col-heading">Company</h3>
+        <ul class="footer-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About OMM</a></li>
+          <li><a href="about.html#values">Our Values</a></li>
+          <li><a href="blog/index.html">Blog &amp; Resources</a></li>
+          <li><a href="contact.html#careers" style="color:rgba(255,255,255,0.75);">Careers</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col-heading">Contact</h3>
+        <address class="footer-address">
+          <p><a href="tel:6032324513">(603) 232-4513</a></p>
+          <p>Manchester, NH</p>
+        </address>
+        <a href="contact.html" class="btn-primary btn-sm">Get In Touch</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p class="footer-copy">&copy; <span id="year"></span> Orchard Medical Management LLC. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a><span aria-hidden="true">&middot;</span><a href="terms-of-use.html">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── File upload interaction ── */
+      var zone      = document.getElementById('fileUploadZone');
+      var fileInput = document.getElementById('resume');
+      var fileName  = document.getElementById('fileUploadName');
+
+      if (zone && fileInput) {
+        // Keyboard accessibility — press Enter/Space to trigger picker
+        zone.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            fileInput.click();
+          }
+        });
+
+        // Show selected file name
+        fileInput.addEventListener('change', function () {
+          if (fileInput.files && fileInput.files.length > 0) {
+            fileName.textContent = fileInput.files[0].name;
+            fileName.classList.add('visible');
+          } else {
+            fileName.textContent = '';
+            fileName.classList.remove('visible');
+          }
+        });
+
+        // Drag-and-drop visual feedback
+        ['dragenter', 'dragover'].forEach(function (evt) {
+          zone.addEventListener(evt, function (e) {
+            e.preventDefault();
+            zone.classList.add('dragover');
+          });
+        });
+        ['dragleave', 'drop'].forEach(function (evt) {
+          zone.addEventListener(evt, function (e) {
+            e.preventDefault();
+            zone.classList.remove('dragover');
+          });
+        });
+        zone.addEventListener('drop', function (e) {
+          var files = e.dataTransfer && e.dataTransfer.files;
+          if (files && files.length > 0) {
+            // Transfer dropped file to the hidden input via DataTransfer
+            try {
+              var dt = new DataTransfer();
+              dt.items.add(files[0]);
+              fileInput.files = dt.files;
+              fileName.textContent = files[0].name;
+              fileName.classList.add('visible');
+            } catch (err) {
+              // Fallback: just show the name even if we can't assign to input
+              fileName.textContent = files[0].name;
+              fileName.classList.add('visible');
+            }
+          }
+        });
+      }
+
+      /* ── Form submission ── */
+      var form          = document.getElementById('careersForm');
+      var formContainer = document.getElementById('formContainer');
+      var formSuccess   = document.getElementById('formSuccess');
+      var successMsg    = document.getElementById('successMessage');
+
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+
+          var firstNameVal = (document.getElementById('firstName').value || '').trim();
+          var displayName  = firstNameVal || 'there';
+          var submitBtn    = form.querySelector('[type="submit"]');
+
+          if (submitBtn) { submitBtn.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Submitting\u2026</div>'; submitBtn.disabled = true; }
+
+          /* Use FormData to include the file attachment — Formspree handles multipart */
+          var formData = new FormData(form);
+
+          fetch('https://formspree.io/f/xdaykokz', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: formData,
+          })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.ok) {
+              successMsg.innerHTML =
+                'Thank you, <strong>' + displayName + '</strong>! Your application has been received. ' +
+                'A member of our team will review your submission and be in touch within ' +
+                '5&ndash;7 business days.';
+              formContainer.style.display = 'none';
+              formSuccess.classList.add('visible');
+              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+              if (submitBtn) { submitBtn.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;">Submit Application <i class="fas fa-paper-plane" aria-hidden="true"></i></div>'; submitBtn.disabled = false; }
+              var errMsg = (data.errors && data.errors.length)
+                ? data.errors.map(function(err) { return err.message; }).join(' ')
+                : 'Something went wrong. Please try again.';
+              alert(errMsg);
+            }
+          })
+          .catch(function() {
+            if (submitBtn) { submitBtn.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;">Submit Application <i class="fas fa-paper-plane" aria-hidden="true"></i></div>'; submitBtn.disabled = false; }
+            alert('Unable to submit. Please email abbott@orchardmedicalmgt.com directly.');
+          });
+        });
+      }
+    }());
+  </script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

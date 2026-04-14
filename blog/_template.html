@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/blog/" />
+  <!--
+  ============================================================
+  BLOG POST TEMPLATE — Orchard Medical Management
+  ============================================================
+  HOW TO USE:
+    1. Copy this file, rename it to your-post-slug.html
+    2. Search for every <!-- PLACEHOLDER --> comment and replace
+       it with the real content.
+    3. Save the file in the blog/ directory.
+    4. Add a <article class="blog-card"> entry to blog/index.html.
+    5. Add the URL to sitemap.xml.
+
+  PLACEHOLDERS IN THIS FILE:
+    POST_TITLE          — Full article title (used in <title>, <h1>, og:title, schema)
+    POST_SLUG           — URL-safe slug, e.g. my-post-title (used in canonical, og:url, schema @id)
+    POST_DESCRIPTION    — 150-160 char meta description
+    POST_KEYWORDS       — Comma-separated keyword list
+    POST_DATE_ISO       — Publication date ISO 8601, e.g. 2026-06-15
+    POST_DATE_DISPLAY   — Human-readable date, e.g. June 15, 2026
+    POST_CATEGORY       — Category label, e.g. Revenue Cycle | AI & Automation | Practice Management | HL7 & Integration | Credentialing
+    POST_CATEGORY_SCHEMA — Category for schema articleSection, e.g. Revenue Cycle
+    POST_READ_TIME      — Read time display, e.g. 8 min read
+    POST_READ_TIME_ISO  — ISO 8601 duration, e.g. PT8M
+    POST_INTRO          — Opening paragraph (article-intro class)
+    TOC_ITEMS           — <li> entries for the table of contents <ol>
+    POST_CONTENT        — Full article HTML body (sections, h2, h3, p, ul, callouts, etc.)
+    POST_CTA_HEADING    — Heading for the inline CTA block
+    POST_CTA_BODY       — Body copy for the inline CTA block
+    POST_TAGS           — <a class="article-tag"> elements for each tag
+    SIDEBAR_CTA_TITLE   — Sidebar CTA widget heading
+    SIDEBAR_CTA_BODY    — Sidebar CTA widget body copy
+    SIDEBAR_SERVICE_LINKS — <li> items in the sidebar services list
+    SIDEBAR_RELATED_1_HREF  — href for first sidebar related post
+    SIDEBAR_RELATED_1_CAT   — Category label for first sidebar related post
+    SIDEBAR_RELATED_1_TITLE — Title for first sidebar related post
+    SIDEBAR_RELATED_2_HREF  — href for second sidebar related post
+    SIDEBAR_RELATED_2_CAT   — Category label for second sidebar related post
+    SIDEBAR_RELATED_2_TITLE — Title for second sidebar related post
+    SIDEBAR_TAGS        — <a class="tag-cloud-item"> elements for tag cloud
+    RELATED_1_HREF      — href for first bottom related post card
+    RELATED_1_CAT       — Category for first bottom related post card
+    RELATED_1_TITLE     — Title for first bottom related post card
+    RELATED_1_EXCERPT   — Excerpt for first bottom related post card
+    RELATED_1_META      — Meta line (read time · date) for first bottom related post card
+    RELATED_2_HREF      — href for second bottom related post card
+    RELATED_2_CAT       — Category for second bottom related post card
+    RELATED_2_TITLE     — Title for second bottom related post card
+    RELATED_2_EXCERPT   — Excerpt for second bottom related post card
+    RELATED_2_META      — Meta line (read time · date) for second bottom related post card
+  ============================================================
+  -->
+  <title><!-- POST_TITLE --> | OMM Blog</title>
+  <meta name="description" content="<!-- POST_DESCRIPTION -->" />
+  <meta name="keywords" content="<!-- POST_KEYWORDS -->" />
+  <link rel="canonical" href="https://orchardmedicalmgt.com/blog/<!-- POST_SLUG -->/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://orchardmedicalmgt.com/blog/<!-- POST_SLUG -->/" />
+  <meta property="og:title" content="<!-- POST_TITLE -->" />
+  <meta property="og:description" content="<!-- POST_DESCRIPTION -->" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "<!-- POST_TITLE -->",
+    "description": "<!-- POST_DESCRIPTION -->",
+    "datePublished": "<!-- POST_DATE_ISO -->",
+    "dateModified": "<!-- POST_DATE_ISO -->",
+    "author": {"@type": "Organization", "name": "Orchard Medical Management", "url": "https://orchardmedicalmgt.com"},
+    "publisher": {"@type": "Organization", "name": "Orchard Medical Management", "logo": {"@type": "ImageObject", "url": "https://orchardmedicalmgt.com/wp-content/uploads/2025/10/OMM_new-logo.png"}},
+    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://orchardmedicalmgt.com/blog/<!-- POST_SLUG -->/"},
+    "keywords": "<!-- POST_KEYWORDS -->",
+    "articleSection": "<!-- POST_CATEGORY_SCHEMA -->",
+    "timeRequired": "<!-- POST_READ_TIME_ISO -->"
+  }
+  </script>
+</head>
+<body>
+
+  <nav class="navbar navbar--solid" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="Orchard Medical Management Home">
+        <img src="../images/omm-logo.png" alt="Orchard Medical Management Logo" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../ai-automation.html">AI &amp; Automation</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="index.html" class="active">Blog</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="tel:6032324513" class="nav-phone"><i class="fas fa-phone-alt" aria-hidden="true"></i>(603) 232-4513</a>
+        <a href="../contact.html" class="btn-primary btn-sm">Get Started</a>
+      </div>
+      <button class="hamburger" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../ai-automation.html">AI &amp; Automation</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="index.html">Blog</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <a href="tel:6032324513" class="mobile-phone">(603) 232-4513</a>
+      <a href="../contact.html" class="btn-primary mobile-menu-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="page-hero-bg" aria-hidden="true"></div>
+      <div class="page-hero-grid" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          <a href="index.html">Blog</a>
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          <span><!-- POST_CATEGORY --></span>
+        </nav>
+        <div class="post-hero-meta">
+          <span class="post-category-badge"><!-- POST_CATEGORY --></span>
+          <span class="post-read-time"><i class="fas fa-clock" aria-hidden="true"></i> <!-- POST_READ_TIME --></span>
+        </div>
+        <h1><!-- POST_TITLE --></h1>
+        <p><!-- POST_DESCRIPTION --></p>
+        <div class="post-hero-author">
+          <div class="author-avatar-sm" aria-hidden="true"><i class="fas fa-building-columns"></i></div>
+          <div>
+            <span class="author-name-sm">Orchard Medical Management</span>
+            <span class="post-date-sm"><!-- POST_DATE_DISPLAY --></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLE BODY -->
+    <section class="article-section section-padding">
+      <div class="container article-layout">
+
+        <!-- MAIN CONTENT -->
+        <article class="article-body" itemscope itemtype="https://schema.org/BlogPosting">
+
+          <!-- INTRO -->
+          <p class="article-intro"><!-- POST_INTRO --></p>
+
+          <!-- TABLE OF CONTENTS -->
+          <nav class="article-toc" aria-label="Table of contents">
+            <h2 class="toc-title"><i class="fas fa-list-ul" aria-hidden="true"></i> In This Guide</h2>
+            <ol class="toc-list">
+              <!-- TOC_ITEMS -->
+              <!--
+              Example TOC items:
+              <li><a href="#section-one">Section One Heading</a></li>
+              <li><a href="#section-two">Section Two Heading</a></li>
+              <li><a href="#faq">Frequently Asked Questions</a></li>
+              -->
+            </ol>
+          </nav>
+
+          <!-- POST_CONTENT -->
+          <!--
+          ============================================================
+          ARTICLE CONTENT GOES HERE
+          ============================================================
+          Use the following HTML building blocks:
+
+          HEADINGS:
+            <h2 id="section-slug">Section Heading</h2>
+            <h3>Sub-section Heading</h3>
+
+          PARAGRAPHS:
+            <p>Body text goes here.</p>
+
+          UNORDERED LIST:
+            <ul>
+              <li><strong>Label:</strong> Description text.</li>
+            </ul>
+
+          ORDERED LIST:
+            <ol>
+              <li>Step one.</li>
+            </ol>
+
+          BLUE CALLOUT BOX:
+            <div class="article-callout article-callout--blue">
+              <div class="callout-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+              <div>
+                <strong>Label:</strong> Callout text here.
+              </div>
+            </div>
+
+          GREEN CALLOUT BOX:
+            <div class="article-callout article-callout--green">
+              <div class="callout-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></div>
+              <div>
+                <strong>Label:</strong> Callout text here.
+              </div>
+            </div>
+
+          FAQ SECTION (always last before CTA):
+            <h2 id="faq">Frequently Asked Questions</h2>
+            <h3>Question text here?</h3>
+            <p>Answer text here.</p>
+          ============================================================
+          -->
+
+          <!-- CTA BLOCK — edit heading and body copy -->
+          <div class="article-cta-block">
+            <h3><!-- POST_CTA_HEADING --></h3>
+            <p><!-- POST_CTA_BODY --></p>
+            <a href="../contact.html" class="btn-primary btn-lg">Get a Free Assessment <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+
+          <!-- TAGS -->
+          <div class="article-tags">
+            <span class="tag-label">Tags:</span>
+            <!-- POST_TAGS -->
+            <!--
+            Example:
+            <a href="index.html?filter=rcm" class="article-tag">Revenue Cycle</a>
+            <a href="index.html?filter=ai" class="article-tag">AI &amp; Automation</a>
+            <a href="index.html?filter=practice" class="article-tag">Practice Management</a>
+            -->
+          </div>
+
+        </article>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" aria-label="Article sidebar">
+
+          <!-- CTA Widget -->
+          <div class="sidebar-widget sidebar-cta-widget">
+            <h3 class="sidebar-widget-title"><!-- SIDEBAR_CTA_TITLE --></h3>
+            <p><!-- SIDEBAR_CTA_BODY --></p>
+            <a href="../contact.html" class="btn-primary btn-sm" style="width:100%;text-align:center;display:block;">Get a Free Assessment <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="tel:6032324513" class="sidebar-phone-link"><i class="fas fa-phone-alt" aria-hidden="true"></i> (603) 232-4513</a>
+          </div>
+
+          <!-- Services List -->
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">OMM Services</h3>
+            <ul class="sidebar-service-list">
+              <!-- SIDEBAR_SERVICE_LINKS -->
+              <!--
+              Default services — replace or trim as relevant to the post topic:
+              <li><a href="../services.html#rcm"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Revenue Cycle Management</a></li>
+              <li><a href="../ai-automation.html#billing"><i class="fas fa-robot" aria-hidden="true"></i> Automated Billing &amp; Posting</a></li>
+              <li><a href="../ai-automation.html#coding"><i class="fas fa-code" aria-hidden="true"></i> AI Medical Coding</a></li>
+              <li><a href="../ai-automation.html#insights"><i class="fas fa-chart-bar" aria-hidden="true"></i> Monthly AI Practice Insights</a></li>
+              <li><a href="../services.html#pm"><i class="fas fa-users" aria-hidden="true"></i> Practice Management</a></li>
+              <li><a href="../services.html#hr"><i class="fas fa-id-badge" aria-hidden="true"></i> Human Resources</a></li>
+              <li><a href="../services.html#cred"><i class="fas fa-id-card-clip" aria-hidden="true"></i> Credentialing</a></li>
+              -->
+            </ul>
+          </div>
+
+          <!-- Related Posts -->
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">Related Articles</h3>
+            <div class="sidebar-related-posts">
+              <a href="<!-- SIDEBAR_RELATED_1_HREF -->" class="sidebar-related-post">
+                <div class="related-post-category"><!-- SIDEBAR_RELATED_1_CAT --></div>
+                <div class="related-post-title"><!-- SIDEBAR_RELATED_1_TITLE --></div>
+              </a>
+              <a href="<!-- SIDEBAR_RELATED_2_HREF -->" class="sidebar-related-post">
+                <div class="related-post-category"><!-- SIDEBAR_RELATED_2_CAT --></div>
+                <div class="related-post-title"><!-- SIDEBAR_RELATED_2_TITLE --></div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Tag Cloud -->
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">Topics</h3>
+            <div class="tag-cloud">
+              <!-- SIDEBAR_TAGS -->
+              <!--
+              Example:
+              <a href="#" class="tag-cloud-item">Revenue Cycle</a>
+              <a href="#" class="tag-cloud-item">Medical Billing</a>
+              <a href="#" class="tag-cloud-item">Practice Management</a>
+              <a href="#" class="tag-cloud-item">NH Healthcare</a>
+              -->
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </section>
+
+    <!-- RELATED POSTS FOOTER -->
+    <section class="related-posts-section section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Keep Reading</span>
+          <h2 class="section-heading">Related Articles</h2>
+        </div>
+        <div class="related-posts-grid">
+          <a href="<!-- RELATED_1_HREF -->" class="related-post-card">
+            <div class="rp-card-category"><!-- RELATED_1_CAT --></div>
+            <h3 class="rp-card-title"><!-- RELATED_1_TITLE --></h3>
+            <p class="rp-card-excerpt"><!-- RELATED_1_EXCERPT --></p>
+            <span class="rp-card-meta"><i class="fas fa-clock" aria-hidden="true"></i> <!-- RELATED_1_META --></span>
+          </a>
+          <a href="<!-- RELATED_2_HREF -->" class="related-post-card">
+            <div class="rp-card-category"><!-- RELATED_2_CAT --></div>
+            <h3 class="rp-card-title"><!-- RELATED_2_TITLE --></h3>
+            <p class="rp-card-excerpt"><!-- RELATED_2_EXCERPT --></p>
+            <span class="rp-card-meta"><i class="fas fa-clock" aria-hidden="true"></i> <!-- RELATED_2_META --></span>
+          </a>
+          <div class="related-post-card related-post-card--cta">
+            <div class="rp-card-category">Get Started</div>
+            <h3 class="rp-card-title">Ready to Strengthen Your Practice?</h3>
+            <p class="rp-card-excerpt">OMM manages the full revenue cycle for NH&rsquo;s leading private practices. Schedule a no-obligation assessment to see where your practice stands.</p>
+            <a href="../contact.html" class="btn-primary btn-sm">Schedule an Assessment <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo"><img src="../images/omm-logo.png" alt="Orchard Medical Management" /></a>
+        <p class="footer-tagline">Fortifying private practices through AI-powered financial and operational excellence since 2004.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/orchard-medical-management-llc/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/people/Orchard-Medical-Management/61584795752793/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h3 class="footer-col-heading">Services</h3><ul class="footer-links"><li><a href="../services.html#rcm">Revenue Cycle Management</a></li><li><a href="../services.html#pm">Practice Management</a></li><li><a href="../services.html#hr">Human Resources</a></li><li><a href="../services.html#cred">Credentialing</a></li><li><a href="../ai-automation.html">AI &amp; Automation</a></li></ul></div>
+      <div class="footer-col"><h3 class="footer-col-heading">Company</h3><ul class="footer-links"><li><a href="../index.html">Home</a></li><li><a href="../about.html">About OMM</a></li><li><a href="index.html">Blog</a></li><li><a href="../contact.html#careers">Careers</a></li><li><a href="../contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h3 class="footer-col-heading">Contact</h3><address class="footer-address"><p><a href="tel:6032324513">(603) 232-4513</a></p><p>Manchester, NH</p></address><a href="../contact.html" class="btn-primary btn-sm">Get In Touch</a></div>
+    </div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="footer-copy">&copy; <span id="year"></span> Orchard Medical Management LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><span>&middot;</span><a href="../terms-of-use.html">Terms of Use</a></div></div></div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

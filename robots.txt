@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://orchardmedicalmgt.com/sitemap.xml
+
+# Disallow admin or private paths (add as needed)
+# Disallow: /wp-admin/
+# Disallow: /wp-login.php

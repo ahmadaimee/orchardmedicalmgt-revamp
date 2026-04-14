@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/blog/" />
+  <title>Blog Manager — OMM Admin (Local Only)</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:    #2563eb;
+      --blue-dk: #1d4ed8;
+      --green:   #16a34a;
+      --red:     #dc2626;
+      --amber:   #d97706;
+      --purple:  #7c3aed;
+      --bg:      #0f172a;
+      --surface: #1e293b;
+      --surface2:#263144;
+      --border:  #334155;
+      --text:    #e2e8f0;
+      --muted:   #94a3b8;
+      --radius:  8px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ---- ADMIN BANNER ---- */
+    .admin-banner {
+      background: var(--purple);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .admin-banner strong { color: #f5d0fe; }
+
+    /* ---- HEADER ---- */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .site-header h1 { font-size: 20px; font-weight: 800; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(220,38,38,0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(220,38,38,0.3);
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .badge::before { content: "⚠"; }
+
+    .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--blue); color: white; }
+    .btn-primary:hover { background: var(--blue-dk); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { color: var(--text); border-color: var(--blue); }
+
+    /* ---- MAIN ---- */
+    .main-content { max-width: 1200px; margin: 0 auto; padding: 32px; }
+
+    /* ---- STATS ROW ---- */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      text-align: center;
+    }
+    .stat-number { font-size: 32px; font-weight: 800; line-height: 1; margin-bottom: 5px; }
+    .stat-label  { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .stat-card.blue   .stat-number { color: #60a5fa; }
+    .stat-card.green  .stat-number { color: #4ade80; }
+    .stat-card.amber  .stat-number { color: #fbbf24; }
+    .stat-card.purple .stat-number { color: #c084fc; }
+
+    /* ---- SECTION HEADER ---- */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .section-header h2 { font-size: 16px; font-weight: 700; }
+    .section-header p  { font-size: 13px; color: var(--muted); margin-top: 3px; }
+
+    /* ---- SEARCH / FILTER ---- */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-wrap input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 14px;
+      padding: 9px 12px 9px 36px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .search-wrap input:focus { border-color: var(--blue); }
+    .search-wrap .icon {
+      position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); font-size: 14px;
+    }
+    .filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 7px 14px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .filter-btn:hover  { color: var(--text); border-color: var(--blue); }
+    .filter-btn.active { background: rgba(37,99,235,0.2); color: #93c5fd; border-color: rgba(37,99,235,0.4); }
+
+    /* ---- TABLE ---- */
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    th.sortable { cursor: pointer; user-select: none; }
+    th.sortable:hover { color: var(--text); }
+    th .sort-icon { margin-left: 5px; opacity: 0.4; }
+    th.sort-asc  .sort-icon { opacity: 1; }
+    th.sort-desc .sort-icon { opacity: 1; transform: rotate(180deg); display: inline-block; }
+
+    tbody tr {
+      border-top: 1px solid var(--border);
+      transition: background .1s;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody tr.hidden-row { display: none; }
+
+    td { padding: 14px 16px; font-size: 14px; vertical-align: middle; }
+
+    .td-title a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .td-title a:hover { color: #93c5fd; }
+    .td-title .slug { font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 3px; font-family: 'Consolas', monospace; }
+
+    .category-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .cat-rcm        { background: rgba(37,99,235,0.15);  color: #93c5fd; }
+    .cat-ai         { background: rgba(109,40,217,0.15); color: #c084fc; }
+    .cat-hl7        { background: rgba(5,150,105,0.15);  color: #34d399; }
+    .cat-practice   { background: rgba(217,119,6,0.15);  color: #fbbf24; }
+    .cat-credentialing { background: rgba(220,38,38,0.15); color: #fca5a5; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .status-published { background: rgba(22,163,74,0.15); color: #4ade80; }
+    .status-draft     { background: rgba(100,116,139,0.15); color: #94a3b8; }
+
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    td.td-date { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+    .td-actions { white-space: nowrap; }
+    .action-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: all .15s;
+      margin-right: 6px;
+    }
+    .action-edit   { background: rgba(37,99,235,0.12); color: #93c5fd; border-color: rgba(37,99,235,0.2); }
+    .action-edit:hover   { background: rgba(37,99,235,0.25); }
+    .action-delete { background: rgba(220,38,38,0.1); color: #fca5a5; border-color: rgba(220,38,38,0.2); }
+    .action-delete:hover { background: rgba(220,38,38,0.25); }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+    }
+
+    /* ---- MODAL ---- */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.7);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 560px; width: 100%;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .modal-icon { font-size: 36px; margin-bottom: 14px; }
+    .modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .modal p  { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+    .modal .file-path {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'Consolas', monospace;
+      font-size: 13px;
+      color: #f87171;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .modal-steps {
+      background: rgba(220,38,38,0.08);
+      border: 1px solid rgba(220,38,38,0.2);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+    .modal-steps h4 { font-size: 12px; font-weight: 700; color: #fca5a5; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .modal-steps ol { padding-left: 18px; }
+    .modal-steps li { font-size: 13px; color: var(--muted); margin-bottom: 7px; line-height: 1.5; }
+    .modal-steps li strong { color: var(--text); }
+    .modal-steps code {
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: 'Consolas', monospace;
+      font-size: 11px;
+      color: #fbbf24;
+    }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .btn-modal-close {
+      padding: 9px 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-modal-close:hover { color: var(--text); }
+
+    /* ---- DEV INSTRUCTIONS PANEL ---- */
+    .dev-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid #fbbf24;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 32px;
+    }
+    .dev-panel h3 { font-size: 14px; font-weight: 700; color: #fbbf24; margin-bottom: 12px; }
+    .dev-panel p  { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+    .dev-panel ol { padding-left: 20px; }
+    .dev-panel li { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 8px; }
+    .dev-panel li strong { color: var(--text); }
+    .dev-panel code {
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: 'Consolas', monospace;
+      font-size: 12px;
+      color: #34d399;
+    }
+
+    /* ---- FOOTER ---- */
+    .admin-footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: #475569;
+      margin-top: 32px;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .main-content { padding: 20px; }
+      .site-header  { padding: 14px 20px; }
+      td.td-date, td.td-status { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-banner">
+    <strong>&#9888; LOCAL ADMIN TOOL</strong> — This page is for local development only. Do not deploy it publicly.
+  </div>
+
+  <header class="site-header">
+    <div class="header-left">
+      <h1>Blog Manager</h1>
+      <span class="badge">Local Only</span>
+    </div>
+    <div class="header-actions">
+      <a href="new-post.html" class="btn btn-primary">
+        &#43; New Post
+      </a>
+      <a href="index.html" target="_blank" class="btn btn-secondary">
+        View Live Blog &#8599;
+      </a>
+      <a href="_template.html" target="_blank" class="btn btn-secondary">
+        HTML Template &#8599;
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- STATS -->
+    <div class="stats-row" id="statsRow">
+      <!-- populated by JS -->
+    </div>
+
+    <!-- BLOG POST TABLE -->
+    <div class="section-header">
+      <div>
+        <h2>All Blog Posts</h2>
+        <p>Manage your existing posts and add new ones. To update the post list, edit the <code style="font-size:12px;background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;color:#34d399;">POSTS</code> array near the top of this file.</p>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <span class="icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="Search by title, category, or slug..." oninput="filterTable()" />
+      </div>
+      <div class="filter-btns" id="filterBtns">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>
+        <button class="filter-btn" data-filter="rcm" onclick="setFilter('rcm',this)">Revenue Cycle</button>
+        <button class="filter-btn" data-filter="ai" onclick="setFilter('ai',this)">AI &amp; Automation</button>
+        <button class="filter-btn" data-filter="hl7" onclick="setFilter('hl7',this)">HL7 &amp; Integration</button>
+        <button class="filter-btn" data-filter="practice" onclick="setFilter('practice',this)">Practice Management</button>
+        <button class="filter-btn" data-filter="credentialing" onclick="setFilter('credentialing',this)">Credentialing</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="postsTable">
+        <thead>
+          <tr>
+            <th style="width:40%;">Title / Slug</th>
+            <th>Category</th>
+            <th class="td-date">Date</th>
+            <th class="td-status">Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="postsTableBody">
+          <!-- populated by JS -->
+        </tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        No posts match your search.
+      </div>
+    </div>
+
+    <!-- DEVELOPER INSTRUCTIONS -->
+    <div class="dev-panel">
+      <h3>&#128218; How to Add a New Post to This Manager</h3>
+      <p>This page reads its data from a JavaScript array called <code>POSTS</code> defined at the top of this file's &lt;script&gt; block. When you publish a new post, add an entry to that array.</p>
+      <ol>
+        <li>Open <code>blog/manage.html</code> in your code editor.</li>
+        <li>Find the <code>const POSTS = [</code> array near the top of the <code>&lt;script&gt;</code> tag.</li>
+        <li>Add a new object to the end of the array following the same structure as the existing entries. Example:
+          <br><br>
+          <code style="display:block;padding:10px 12px;margin-top:4px;line-height:1.7;">{
+  title: "Your New Post Title",
+  slug: "your-new-post-slug",
+  category: "Revenue Cycle",
+  categoryKey: "rcm",
+  date: "May 1, 2026",
+  dateIso: "2026-05-01",
+  readTime: "8 min read",
+  status: "published"
+},</code>
+        </li>
+        <li>Save the file. Refresh this page in your browser — the post will appear in the table.</li>
+      </ol>
+      <p style="margin-top:12px;">Category key values: <code>rcm</code> | <code>ai</code> | <code>hl7</code> | <code>practice</code> | <code>credentialing</code></p>
+    </div>
+
+  </main>
+
+  <footer class="admin-footer">
+    Orchard Medical Management — Blog Admin &nbsp;|&nbsp; LOCAL DEVELOPMENT TOOL — Not for public deployment
+  </footer>
+
+  <!-- DELETE MODAL -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+      <div class="modal-icon">&#128465;</div>
+      <h3>Delete Post</h3>
+      <p>This is a static HTML site — there is no server to delete files automatically. Follow these steps to fully remove the post:</p>
+      <div class="file-path" id="modalFilePath"></div>
+      <div class="modal-steps">
+        <h4>Manual Deletion Checklist</h4>
+        <ol>
+          <li><strong>Delete the file:</strong> Remove <code id="modalFileDelete"></code> from your <code>blog/</code> folder using your file explorer or code editor.</li>
+          <li><strong>Remove the card:</strong> Open <code>blog/index.html</code> and delete the <code>&lt;article class="blog-card"&gt;</code> block that links to this post.</li>
+          <li><strong>Remove from sitemap:</strong> Open <code>sitemap.xml</code> and delete the <code>&lt;url&gt;</code> entry for this post's URL.</li>
+          <li><strong>Remove from this manager:</strong> Open <code>blog/manage.html</code>, find the <code>POSTS</code> array in the &lt;script&gt; block, and delete the matching entry.</li>
+          <li><strong>Check related posts:</strong> Search for this post's slug in the other <code>blog/*.html</code> files — remove any sidebar or bottom related-post links that reference it.</li>
+        </ol>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-modal-close" onclick="closeModal()">Got It — Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================================================================
+    // POST DATA
+    // ================================================================
+    // To add a new post: copy one of the objects below, update all
+    // fields, and paste it at the end of this array.
+    // Then also add the card to blog/index.html and the URL to sitemap.xml.
+    // ================================================================
+    const POSTS = [
+      {
+        title: "Why Employer Benefits Are the Secret Weapon for Healthcare Practices in Manchester, NH",
+        slug: "employer-benefits-healthcare-practices",
+        category: "Practice Management",
+        categoryKey: "practice",
+        date: "April 2, 2026",
+        dateIso: "2026-04-02",
+        readTime: "8 min read",
+        status: "published"
+      },
+      {
+        title: "Revenue Cycle Management in 2026: What Every Manchester, NH Private Practice Needs to Know",
+        slug: "revenue-cycle-management-2026",
+        category: "Revenue Cycle",
+        categoryKey: "rcm",
+        date: "March 3, 2026",
+        dateIso: "2026-03-03",
+        readTime: "9 min read",
+        status: "published"
+      },
+      {
+        title: "Healthcare Purchasing Solutions for Medical Practices",
+        slug: "healthcare-purchasing-solutions",
+        category: "Practice Management",
+        categoryKey: "practice",
+        date: "February 4, 2026",
+        dateIso: "2026-02-04",
+        readTime: "7 min read",
+        status: "published"
+      },
+      {
+        title: "Enhancing Operational Efficiency by Reducing Payment Processing Costs",
+        slug: "payment-processing-costs-medical-practices",
+        category: "Practice Management",
+        categoryKey: "practice",
+        date: "January 2, 2026",
+        dateIso: "2026-01-02",
+        readTime: "7 min read",
+        status: "published"
+      },
+      {
+        title: "Financial Management and Budgeting for Medical Practices",
+        slug: "financial-management-budgeting-medical-practices",
+        category: "Practice Management",
+        categoryKey: "practice",
+        date: "December 1, 2025",
+        dateIso: "2025-12-01",
+        readTime: "8 min read",
+        status: "published"
+      },
+      {
+        title: "Patient Acquisition Strategies That Work: How Private Practices Can Compete and Grow",
+        slug: "patient-acquisition-strategies-private-practices",
+        category: "Practice Management",
+        categoryKey: "practice",
+        date: "November 3, 2025",
+        dateIso: "2025-11-03",
+        readTime: "9 min read",
+        status: "published"
+      },
+      {
+        title: "The Complete Guide to AI Automation in Medical Practice Management",
+        slug: "ai-automation-healthcare-guide",
+        category: "AI & Automation",
+        categoryKey: "ai",
+        date: "April 10, 2025",
+        dateIso: "2025-04-10",
+        readTime: "12 min read",
+        status: "published"
+      },
+      {
+        title: "10 Revenue Cycle Management Best Practices Every Private Practice Should Follow",
+        slug: "revenue-cycle-management-best-practices",
+        category: "Revenue Cycle",
+        categoryKey: "rcm",
+        date: "March 28, 2025",
+        dateIso: "2025-03-28",
+        readTime: "9 min read",
+        status: "published"
+      },
+      {
+        title: "HL7 & FHIR Integration: A Complete Guide for Medical Practices",
+        slug: "hl7-fhir-integration-guide",
+        category: "HL7 & Integration",
+        categoryKey: "hl7",
+        date: "March 15, 2025",
+        dateIso: "2025-03-15",
+        readTime: "10 min read",
+        status: "published"
+      }
+    ];
+
+    // ================================================================
+    // RENDER TABLE
+    // ================================================================
+    const categoryClasses = {
+      rcm:          'cat-rcm',
+      ai:           'cat-ai',
+      hl7:          'cat-hl7',
+      practice:     'cat-practice',
+      credentialing:'cat-credentialing'
+    };
+
+    let currentFilter = 'all';
+
+    function renderStats() {
+      const total     = POSTS.length;
+      const published = POSTS.filter(p => p.status === 'published').length;
+      const draft     = POSTS.filter(p => p.status === 'draft').length;
+      const cats      = [...new Set(POSTS.map(p => p.categoryKey))].length;
+
+      document.getElementById('statsRow').innerHTML = `
+        <div class="stat-card blue">
+          <div class="stat-number">${total}</div>
+          <div class="stat-label">Total Posts</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-number">${published}</div>
+          <div class="stat-label">Published</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="stat-number">${draft}</div>
+          <div class="stat-label">Drafts</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-number">${cats}</div>
+          <div class="stat-label">Categories</div>
+        </div>
+      `;
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('postsTableBody');
+
+      // Sort by date descending
+      const sorted = [...POSTS].sort((a, b) => new Date(b.dateIso) - new Date(a.dateIso));
+
+      tbody.innerHTML = sorted.map(post => {
+        const catClass = categoryClasses[post.categoryKey] || 'cat-practice';
+        const statusClass = post.status === 'published' ? 'status-published' : 'status-draft';
+        const statusLabel = post.status === 'published' ? 'Published' : 'Draft';
+
+        return `<tr class="post-row" data-category="${post.categoryKey}" data-title="${post.title.toLowerCase()}" data-slug="${post.slug.toLowerCase()}">
+          <td class="td-title">
+            <a href="${post.slug}.html" target="_blank">${escHtml(post.title)}</a>
+            <div class="slug">${post.slug}.html</div>
+          </td>
+          <td>
+            <span class="category-badge ${catClass}">${escHtml(post.category)}</span>
+          </td>
+          <td class="td-date">${escHtml(post.date)} &middot; ${escHtml(post.readTime)}</td>
+          <td class="td-status">
+            <span class="status-badge ${statusClass}">
+              <span class="status-dot"></span>
+              ${statusLabel}
+            </span>
+          </td>
+          <td class="td-actions">
+            <a href="${post.slug}.html" target="_blank" class="action-btn action-edit">
+              &#9998; Edit
+            </a>
+            <button class="action-btn action-delete" onclick="showDeleteModal('${post.slug}')">
+              &#128465; Delete
+            </button>
+          </td>
+        </tr>`;
+      }).join('');
+    }
+
+    function escHtml(str) {
+      const d = document.createElement('div');
+      d.appendChild(document.createTextNode(str));
+      return d.innerHTML;
+    }
+
+    // ================================================================
+    // FILTER & SEARCH
+    // ================================================================
+    function setFilter(key, btn) {
+      currentFilter = key;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterTable();
+    }
+
+    function filterTable() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const rows  = document.querySelectorAll('#postsTableBody .post-row');
+      let visible = 0;
+
+      rows.forEach(row => {
+        const matchCat   = currentFilter === 'all' || row.dataset.category === currentFilter;
+        const matchQuery = !query ||
+          row.dataset.title.includes(query) ||
+          row.dataset.slug.includes(query) ||
+          row.dataset.category.includes(query);
+
+        if (matchCat && matchQuery) {
+          row.style.display = '';
+          visible++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    // ================================================================
+    // DELETE MODAL
+    // ================================================================
+    function showDeleteModal(slug) {
+      document.getElementById('modalFilePath').textContent = 'blog/' + slug + '.html';
+      document.getElementById('modalFileDelete').textContent = slug + '.html';
+      document.getElementById('deleteModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('deleteModal').classList.remove('open');
+    }
+
+    // Close on overlay click
+    document.getElementById('deleteModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // ================================================================
+    // INIT
+    // ================================================================
+    renderStats();
+    renderTable();
+  </script>
+
+</body>
+</html>

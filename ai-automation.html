@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/" />
+  <title>AI Automation for Medical Practices | AI Calling Agents, Scheduling &amp; Billing | OMM</title>
+  <meta name="description" content="AI calling agents, automated patient scheduling, HL7 FHIR integration &amp; AI billing across 15+ EMRs. Reduce admin burden 40%+. NH's leading medical practice AI automation platform." />
+  <meta name="keywords" content="AI medical practice management, AI calling agents healthcare, AI receptionist medical office, automated patient scheduling, medical billing automation, HL7 FHIR integration, AI practice insights, EMR integration services, healthcare automation platform, AI voice agents healthcare" />
+  <link rel="canonical" href="https://orchardmedicalmgt.com/ai-automation/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://orchardmedicalmgt.com/ai-automation/" />
+  <meta property="og:title" content="AI Automation for Medical Practices | AI Calling, Scheduling &amp; Billing | OMM" />
+  <meta property="og:description" content="AI calling agents, automated scheduling, HL7 FHIR integration &amp; AI billing across 15+ EMR platforms. Reduce admin burden 40%+ and collect more revenue with OMM's AI automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "AI Automation Services for Medical Practices",
+    "provider": {"@type": "MedicalBusiness", "name": "Orchard Medical Management", "url": "https://orchardmedicalmgt.com", "telephone": "+16032324513", "address": {"@type": "PostalAddress", "addressLocality": "Manchester", "addressRegion": "NH", "addressCountry": "US"}},
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "item": {"@type": "Service", "name": "AI Calling Agent for Medical Practices", "description": "24/7 AI-powered calling agent handling patient appointment confirmations, balance inquiries, prescription refills, and new patient intake."}},
+      {"@type": "ListItem", "position": 2, "item": {"@type": "Service", "name": "HL7 FHIR Integration Services", "description": "Bi-directional HL7 v2 and FHIR R4 integrations across 15+ EMR platforms for real-time data exchange and AI automation enablement."}},
+      {"@type": "ListItem", "position": 3, "item": {"@type": "Service", "name": "Automated Patient Scheduling", "description": "AI-powered scheduling automation with intelligent slot matching, cancellation backfill, no-show prediction, and patient outreach."}},
+      {"@type": "ListItem", "position": 4, "item": {"@type": "Service", "name": "Automated Billing and Payment Posting", "description": "Automated ERA processing, same-day payment posting, underpayment detection, and patient balance statement generation."}},
+      {"@type": "ListItem", "position": 5, "item": {"@type": "Service", "name": "AI Medical Coding Assistance", "description": "AI-assisted CPT and ICD-10 coding with documentation gap detection, payer-specific rule validation, and compliance audit trails."}},
+      {"@type": "ListItem", "position": 6, "item": {"@type": "Service", "name": "Monthly AI Practice Insights", "description": "Monthly AI-generated intelligence brief covering revenue performance, denial analysis, AR aging, coding patterns, and 90-day forecasting."}}
+    ]
+  }
+  </script>
+  <style>
+    .ai-page-hero {
+      background: var(--color-surface);
+      padding: calc(var(--nav-height) + var(--space-16)) 0 var(--space-20);
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .ai-page-hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(37,99,235,0.07) 0%, transparent 65%),
+                  radial-gradient(ellipse 40% 40% at 10% 90%, rgba(37,99,235,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .ai-page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(37,99,235,0.06) 1px, transparent 1px);
+      background-size: 32px 32px; pointer-events: none;
+    }
+    .ai-page-hero-content { position: relative; z-index: 1; }
+    .ai-page-hero h1 {
+      font-size: var(--text-5xl); font-weight: var(--font-black);
+      letter-spacing: -0.03em; line-height: 1.1; color: var(--color-dark);
+      max-width: 100%; margin: 0 auto var(--space-6);
+    }
+    .ai-page-hero h1 .hero-heading-accent { color: var(--color-accent); }
+    .ai-page-hero p { font-size: var(--text-xl); color: var(--color-text-muted); max-width: 100%; margin: 0 auto var(--space-10); line-height: 1.65; }
+    .emr-count-badge {
+      display: inline-flex; align-items: center; gap: var(--space-3);
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: 999px; padding: var(--space-2) var(--space-5);
+      font-size: var(--text-sm); font-weight: var(--font-medium);
+      color: var(--color-text-muted); margin-bottom: var(--space-8);
+    }
+    html[data-theme="dark"] .emr-count-badge {
+      color: rgba(255,255,255,0.85);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Orchard Medical Management Home">
+        <img src="images/omm-logo.png" alt="Orchard Medical Management Logo" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="ai-automation.html" class="active">AI &amp; Automation</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="tel:6032324513" class="nav-phone"><i class="fas fa-phone-alt" aria-hidden="true"></i>(603) 232-4513</a>
+        <a href="contact.html" class="btn-primary btn-sm">Get Started</a>
+        <button class="theme-toggle" aria-label="Switch to dark mode" title="Toggle dark/light mode"></button>
+      </div>
+      <button class="hamburger" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="ai-automation.html">AI &amp; Automation</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="tel:6032324513" class="mobile-phone">(603) 232-4513</a>
+      <a href="contact.html" class="btn-primary mobile-menu-cta">Get Started</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="ai-page-hero">
+      <div class="ai-page-hero-bg" aria-hidden="true"></div>
+      <div class="ai-page-hero-grid" aria-hidden="true"></div>
+      <div class="container ai-page-hero-content">
+
+        <div class="emr-count-badge">
+          <span style="width:8px;height:8px;border-radius:50%;background:#4ADE80;flex-shrink:0;"></span>
+          15+ EMR Platforms Integrated &amp; Automated
+        </div>
+        <h1 id="pageHeroH1" aria-label="The Future of Practice Management Is Already Here"></h1>
+        <p>OMM deploys cutting-edge AI and automation across every dimension of your practice — so your team can do more, earn more, and stress less.</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-4);flex-wrap:wrap;">
+          <a href="contact.html" class="btn-primary btn-lg">See It In Action <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          <a href="#emr-integrations" class="btn-outline">View EMR Integrations</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI FEATURES GRID -->
+    <section id="calling" class="ai-section section-padding">
+      <div class="ai-section-bg" aria-hidden="true"></div>
+      <div class="container ai-section-content">
+        <div class="section-header">
+          <span class="section-label section-label--light">AI Solutions</span>
+          <h2 class="section-heading section-heading--light">Six AI-Powered Solutions, One Unified Practice</h2>
+          <p class="section-subheading section-subheading--light">Every automation OMM deploys is purpose-built for healthcare — HIPAA-aware, EMR-integrated, and designed to improve both financial outcomes and patient experience.</p>
+        </div>
+        <div class="ai-features-grid">
+          <div class="ai-feature-card ai-card--highlight" id="calling">
+            <div class="ai-icon-wrap"><i class="fas fa-phone-volume" aria-hidden="true"></i></div>
+            <h3 class="ai-feature-title">AI Calling Agent</h3>
+            <p class="ai-feature-desc">Our AI calling agent conducts natural, human-like voice conversations with patients for appointment reminders, recall outreach, collections follow-ups, satisfaction surveys, and more — 24 hours a day, 7 days a week. Dramatically reduces no-shows, recovers overdue balances, and frees your front desk to focus on in-person patient experience.</p>
+            <span class="ai-feature-tag"><i class="fas fa-circle" style="font-size:5px"></i> Live &amp; Active</span>
+          </div>
+          <div class="ai-feature-card" id="hl7">
+            <div class="ai-icon-wrap"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
+            <h3 class="ai-feature-title">HL7 &amp; FHIR Integration Services</h3>
+            <p class="ai-feature-desc">We design, build, and maintain HL7 and FHIR data exchange pipelines between your EMR, payers, labs, imaging centers, and ancillary systems. From ADT and SIU messages to FHIR APIs, our integration layer keeps clinical and financial data synchronized and actionable across every touchpoint in your care ecosystem.</p>
+            <span class="ai-feature-tag"><i class="fas fa-circle" style="font-size:5px"></i> Deployed</span>
+          </div>
+          <div class="ai-feature-card" id="scheduling">
+            <div class="ai-icon-wrap"><i class="fas fa-calendar-check" aria-hidden="true"></i></div>
+            <h3 class="ai-feature-title">Automated Patient Scheduling</h3>
+            <p class="ai-feature-desc">AI-powered scheduling intelligently fills appointment slots based on provider availability, patient history, appointment type, and demand patterns. Patients can self-schedule online, by phone, or via SMS. The system automatically handles reschedules, waitlists, and same-day cancellation backfill — maximizing your daily patient volume.</p>
+            <span class="ai-feature-tag"><i class="fas fa-circle" style="font-size:5px"></i> Deployed</span>
+          </div>
+          <div class="ai-feature-card" id="billing">
+            <div class="ai-icon-wrap"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></div>
+            <h3 class="ai-feature-title">Automated Billing &amp; Payment Posting</h3>
+            <p class="ai-feature-desc">End-to-end automated patient billing combined with intelligent payment posting that reconciles EOBs, ERAs, and patient payments in real time. Our system identifies posting errors, flags underpayments, and automatically routes exceptions for human review — dramatically reducing AR days and administrative overhead.</p>
+            <span class="ai-feature-tag"><i class="fas fa-circle" style="font-size:5px"></i> Deployed</span>
+          </div>
+          <div class="ai-feature-card" id="coding">
+            <div class="ai-icon-wrap"><i class="fas fa-code" aria-hidden="true"></i></div>
+            <h3 class="ai-feature-title">AI Coding Assistance</h3>
+            <p class="ai-feature-desc">Our AI coding engine cross-references clinical documentation against CPT and ICD-10 code sets in real time, flagging under-coded or over-coded encounters before submission. This dramatically reduces denials from coding errors and ensures your practice captures every dollar of reimbursement it&rsquo;s entitled to.</p>
+            <span class="ai-feature-tag"><i class="fas fa-circle" style="font-size:5px"></i> Deployed</span>
+          </div>
+          <div class="ai-feature-card ai-card--highlight" id="insights">
+            <div class="ai-icon-wrap"><i class="fas fa-chart-pie" aria-hidden="true"></i></div>
+            <h3 class="ai-feature-title">Monthly AI Practice Insights</h3>
+            <p class="ai-feature-desc">Every month, your practice receives a fully automated AI-generated report covering revenue trends, denial patterns, payer mix, scheduling efficiency, cash flow projections, and provider-level productivity scores — with plain-English recommendations you can act on immediately.</p>
+            <span class="ai-feature-tag"><i class="fas fa-circle" style="font-size:5px"></i> Live &amp; Active</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI INSIGHTS DASHBOARD SHOWCASE -->
+    <section class="insights-section section-padding">
+      <div class="container insights-grid">
+        <div class="insights-content">
+          <span class="section-label">Practice Intelligence</span>
+          <h2 class="insights-heading">Your Practice, Analyzed.<br>Every Single Month.</h2>
+          <p class="insights-body">Our AI insights engine collects data across every dimension of your practice — billing, scheduling, collections, and clinical throughput — and delivers a clear, actionable monthly report directly to your inbox.</p>
+          <ul class="insights-list">
+            <li class="insights-list-item"><i class="fas fa-check-circle" aria-hidden="true"></i>Revenue cycle performance vs. prior period and benchmarks</li>
+            <li class="insights-list-item"><i class="fas fa-check-circle" aria-hidden="true"></i>Top denial reasons with AI-recommended resolution paths</li>
+            <li class="insights-list-item"><i class="fas fa-check-circle" aria-hidden="true"></i>Payer mix analysis and collection rate by payer</li>
+            <li class="insights-list-item"><i class="fas fa-check-circle" aria-hidden="true"></i>Scheduling efficiency, no-show rates, and capacity utilization</li>
+            <li class="insights-list-item"><i class="fas fa-check-circle" aria-hidden="true"></i>Predictive cash flow forecasting for the next 30&ndash;90 days</li>
+            <li class="insights-list-item"><i class="fas fa-check-circle" aria-hidden="true"></i>Provider-level productivity and coding accuracy scores</li>
+          </ul>
+          <a href="contact.html" class="btn-primary" style="align-self:flex-start;margin-top:var(--space-2);">Request a Sample Report <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="insights-dashboard">
+          <div class="dashboard-header">
+            <span class="dashboard-title">Monthly Practice Report &mdash; April 2025</span>
+            <span class="dashboard-badge">AI Generated</span>
+          </div>
+          <div class="dashboard-kpis">
+            <div class="dashboard-kpi"><span class="kpi-label">Net Collections</span><span class="kpi-value" data-kpi-prefix="$" data-kpi-target="284" data-kpi-suffix="K">$284K</span><span class="kpi-delta"><i class="fas fa-arrow-up" style="font-size:0.6rem"></i> +12.4%</span></div>
+            <div class="dashboard-kpi"><span class="kpi-label">Clean Claim Rate</span><span class="kpi-value" data-kpi-target="96.8" data-kpi-suffix="%" data-kpi-decimal="1">96.8%</span><span class="kpi-delta"><i class="fas fa-arrow-up" style="font-size:0.6rem"></i> +2.1%</span></div>
+            <div class="dashboard-kpi"><span class="kpi-label">Days in A/R</span><span class="kpi-value" data-kpi-target="28.4" data-kpi-decimal="1">28.4</span><span class="kpi-delta kpi-delta--ar-down"><i class="fas fa-arrow-down" style="font-size:0.6rem"></i> &minus;3.2 days</span></div>
+          </div>
+          <div class="dashboard-chart">
+            <span class="chart-label">Monthly Collections Trend</span>
+            <div class="chart-bars">
+              <div class="chart-bar" style="height:45%"></div><div class="chart-bar" style="height:55%"></div>
+              <div class="chart-bar" style="height:50%"></div><div class="chart-bar" style="height:62%"></div>
+              <div class="chart-bar" style="height:58%"></div><div class="chart-bar" style="height:70%"></div>
+              <div class="chart-bar" style="height:66%"></div><div class="chart-bar" style="height:75%"></div>
+              <div class="chart-bar" style="height:72%"></div><div class="chart-bar" style="height:80%"></div>
+              <div class="chart-bar" style="height:85%"></div><div class="chart-bar active" style="height:100%"></div>
+            </div>
+          </div>
+          <div class="dashboard-row">
+            <div class="dashboard-metric"><div class="metric-icon"><i class="fas fa-robot" aria-hidden="true"></i></div><div class="metric-text"><span class="metric-name">AI Calls Made</span><span class="metric-val" data-kpi-target="1847" data-kpi-comma="1">1,847</span></div></div>
+            <div class="dashboard-metric"><div class="metric-icon"><i class="fas fa-calendar" aria-hidden="true"></i></div><div class="metric-text"><span class="metric-name">Appts Booked</span><span class="metric-val" data-kpi-target="312">312</span></div></div>
+            <div class="dashboard-metric"><div class="metric-icon"><i class="fas fa-ban" aria-hidden="true"></i></div><div class="metric-text"><span class="metric-name">Denial Rate</span><span class="metric-val" data-kpi-target="1.8" data-kpi-suffix="%" data-kpi-decimal="1">1.8%</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMR INTEGRATIONS -->
+    <section id="emr-integrations" class="emr-section section-padding">
+      <div class="container">
+        <div class="emr-intro">
+          <span class="section-label">EMR Integrations</span>
+          <h2 class="section-heading">Works With Your EMR.<br>All of Them.</h2>
+          <p class="section-subheading" style="margin:var(--space-4) auto 0;">OMM has automated workflows across <strong>15+ leading EMR platforms</strong>. If your practice uses it, we&rsquo;ve integrated it.</p>
+        </div>
+        <!-- Infinite scroll marquee -->
+        <div class="emr-marquee-wrap">
+          <div class="emr-marquee-track" id="emrTrack">
+            <span class="emr-badge"><img src="images/emr/epic.png" alt="Epic" width="20" height="20">Epic</span>
+            <span class="emr-badge"><img src="images/emr/athenahealth.png" alt="Athenahealth" width="20" height="20">Athenahealth</span>
+            <span class="emr-badge"><img src="images/emr/eclinicalworks.jpg" alt="eClinicalWorks" width="20" height="20">eClinicalWorks</span>
+            <span class="emr-badge"><img src="images/emr/oracle-health.svg" alt="Oracle Health" width="20" height="20">Oracle Health (Cerner)</span>
+            <span class="emr-badge"><img src="images/emr/allscripts.svg" alt="Allscripts" width="20" height="20">Allscripts</span>
+            <span class="emr-badge"><img src="images/emr/nextgen.svg" alt="NextGen Healthcare" width="20" height="20">NextGen Healthcare</span>
+            <span class="emr-badge"><img src="images/emr/tebra.svg" alt="Kareo / Tebra" width="20" height="20">Kareo / Tebra</span>
+            <span class="emr-badge"><img src="images/emr/drchrono.png" alt="DrChrono" width="20" height="20">DrChrono</span>
+            <span class="emr-badge"><img src="images/emr/practicefusion.svg" alt="Practice Fusion" width="20" height="20">Practice Fusion</span>
+            <span class="emr-badge"><img src="images/emr/advancedmd.png" alt="AdvancedMD" width="20" height="20">AdvancedMD</span>
+            <span class="emr-badge"><img src="images/emr/modmed.png" alt="ModMed" width="20" height="20">ModMed</span>
+            <span class="emr-badge"><img src="images/emr/greenway.png" alt="Greenway Health" width="20" height="20">Greenway Health</span>
+            <span class="emr-badge"><img src="images/emr/amazingcharts.jpg" alt="Amazing Charts" width="20" height="20">Amazing Charts</span>
+            <span class="emr-badge"><img src="images/emr/meditech.svg" alt="Meditech" width="20" height="20">Meditech</span>
+            <span class="emr-badge"><img src="images/emr/charmehr.jpg" alt="CharmEHR" width="20" height="20">CharmEHR</span>
+            <span class="emr-badge"><img src="images/emr/officeally.png" alt="Office Ally" width="20" height="20">Office Ally</span>
+          </div>
+        </div>
+        <script>
+        (function(){
+          var track = document.getElementById('emrTrack');
+          if (!track) return;
+          /* Duplicate badges for seamless infinite loop */
+          var origItems = Array.from(track.children);
+          origItems.forEach(function(item) {
+            track.appendChild(item.cloneNode(true));
+          });
+        }());
+        </script>
+
+        <script>
+        /* ── Dashboard KPI counter animation ── */
+        (function(){
+          var DURATION = 1600;
+          function easeOut(t){ return 1 - Math.pow(1-t, 3); }
+          function formatNum(n, decimal, prefix, suffix, comma){
+            var s = decimal ? n.toFixed(decimal) : Math.round(n).toString();
+            if(comma) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return (prefix||'') + s + (suffix||'');
+          }
+          function animateKpi(el){
+            var target  = parseFloat(el.getAttribute('data-kpi-target'));
+            var prefix  = el.getAttribute('data-kpi-prefix') || '';
+            var suffix  = el.getAttribute('data-kpi-suffix') || '';
+            var decimal = parseInt(el.getAttribute('data-kpi-decimal')||'0', 10);
+            var comma   = el.getAttribute('data-kpi-comma') === '1';
+            var start   = null;
+            function step(ts){
+              if(!start) start = ts;
+              var p = Math.min((ts - start) / DURATION, 1);
+              el.textContent = formatNum(easeOut(p) * target, decimal||0, prefix, suffix, comma);
+              if(p < 1) requestAnimationFrame(step);
+              else el.textContent = formatNum(target, decimal||0, prefix, suffix, comma);
+            }
+            requestAnimationFrame(step);
+          }
+          var els = document.querySelectorAll('[data-kpi-target]');
+          var fired = false;
+          var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+              if(e.isIntersecting && !fired){
+                fired = true;
+                els.forEach(animateKpi);
+                io.disconnect();
+              }
+            });
+          }, { threshold: 0.3 });
+          var dashboard = document.querySelector('.insights-dashboard');
+          if(dashboard) io.observe(dashboard);
+        }());
+        </script>
+        <p class="emr-footnote" style="margin-top:var(--space-8);">Don&rsquo;t see yours? <strong>We likely support it.</strong> <a href="contact.html" class="btn-primary btn-sm" style="margin-left:var(--space-3);vertical-align:middle;">Ask us <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-bg" aria-hidden="true"></div>
+      <div class="container cta-content">
+        <h2 class="cta-heading">Ready to Automate Your Practice?</h2>
+        <p class="cta-subtext">See exactly which AI solutions are right for your specialty and EMR. Schedule a free discovery call today.</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn-primary btn-lg">Schedule a Discovery Call <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          <a href="tel:6032324513" class="btn-outline"><i class="fas fa-phone-alt" aria-hidden="true"></i>(603) 232-4513</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo"><img src="images/omm-logo.png" alt="Orchard Medical Management" /></a>
+        <p class="footer-tagline">Fortifying private practices through AI-powered financial and operational excellence since 2004.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/orchard-medical-management-llc/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://www.facebook.com/people/Orchard-Medical-Management/61584795752793/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h3 class="footer-col-heading">AI Services</h3><ul class="footer-links"><li><a href="#calling">AI Calling Agent</a></li><li><a href="#hl7">HL7 Integration</a></li><li><a href="#scheduling">Automated Scheduling</a></li><li><a href="#billing">Automated Billing</a></li><li><a href="#coding">AI Coding</a></li><li><a href="#insights">AI Insights</a></li></ul></div>
+      <div class="footer-col"><h3 class="footer-col-heading">Company</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="about.html">About</a></li><li><a href="blog/index.html">Blog</a></li><li><a href="contact.html#careers">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h3 class="footer-col-heading">Contact</h3><address class="footer-address"><p><a href="tel:6032324513">(603) 232-4513</a></p><p>Manchester, NH</p></address><a href="contact.html" class="btn-primary btn-sm">Get In Touch</a></div>
+    </div>
+    <div class="footer-bottom"><div class="container footer-bottom-inner"><p class="footer-copy">&copy; <span id="year"></span> Orchard Medical Management LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><span>&middot;</span><a href="terms-of-use.html">Terms of Use</a></div></div></div>
+  </footer>
+  <script src="js/main.js"></script>
+  <script>
+  (function(){
+    var h1 = document.getElementById('pageHeroH1');
+    if (!h1) return;
+    var CHAR_MS=40, DELETE_MS=22, LINE_GAP=360, END_PAUSE=2400, START_PAUSE=500;
+    var segs = [
+      { text:'The Future of Practice ', accent:false, isLineEnd:false },
+      { text:'Management', accent:true, isLineEnd:true },
+      { text:'Is Already ', accent:false, isLineEnd:false },
+      { text:'Here', accent:true, isLineEnd:false }
+    ];
+    segs.forEach(function(seg){
+      var s=document.createElement('span');
+      if(seg.accent) s.className='hero-heading-accent';
+      seg.el=s; h1.appendChild(s);
+      if(seg.isLineEnd) h1.appendChild(document.createElement('br'));
+    });
+    function setActive(i){ segs.forEach(function(s){ s.el.classList.remove('typing-active'); }); if(i>=0&&i<segs.length) segs[i].el.classList.add('typing-active'); }
+    var si=0, ci=0;
+    function typeNext(){ if(si>=segs.length){ setTimeout(beginDelete,END_PAUSE); return; } setActive(si); var seg=segs[si]; if(ci<seg.text.length){ seg.el.textContent+=seg.text[ci++]; setTimeout(typeNext,CHAR_MS); } else { var prev=si++; ci=0; setTimeout(typeNext,segs[prev].isLineEnd?LINE_GAP:0); } }
+    function beginDelete(){ si=segs.length-1; ci=segs[si].el.textContent.length; deleteNext(); }
+    function deleteNext(){ setActive(si); var seg=segs[si]; if(ci>0){ seg.el.textContent=seg.el.textContent.slice(0,--ci); setTimeout(deleteNext,DELETE_MS); } else if(si>0){ si--; ci=segs[si].el.textContent.length; setTimeout(deleteNext,DELETE_MS); } else { si=0;ci=0; setTimeout(typeNext,START_PAUSE); } }
+    setTimeout(typeNext,400);
+  }());
+  </script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/ehr-hometemplate.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, maximum-scale=1.0">
+<link rel="SHORTCUT ICON" href="images/favicon.ico"/>
+
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Not Found</title>
+<!-- InstanceEndEditable -->
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+
+<!-- InstanceBeginEditable name="keywords" -->
+<meta name="keywords" content="CharmHealth EHR Site Map" />
+<meta name="description" content="CharmHealth EHR Site Map"/>
+<!-- InstanceEndEditable -->
+
+<link href="css/charmtracker.css" rel="stylesheet" type="text/css"/>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="https://www.charmhealth.com/js/me-jquery.js"></script> 
+<script type="text/javascript" src="https://www.charmhealth.com/js/ipcallback.js"></script>
+
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+
+</head>
+
+<!--<!-- TemplateBeginEditable name="onloadscript" -->
+<body class="charm-bg">
+<!--<!-- TemplateEndEditable -->
+
+<!------- Google Tag Manager (noscript) ------->
+<noscript>
+<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TVWPRQP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!------- End Google Tag Manager (noscript) -------> 
+
+<!------- Header Include Start ------->
+<div id="header"></div>
+<script src="/js/charm-main.js"></script> 
+<script>
+    // Load external HTML into main page
+    function loadHTML(id, url) {
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById(id).innerHTML = data;
+        });
+    }
+    loadHTML("header", "/charm-header.html");
+</script>
+<!------- Header Include End ------->
+
+<div id="topband" class="header show">
+    <div class="cm-wd"> <!-- InstanceBeginEditable name="bodyheader" --> <h1>Not Found</h1><!-- InstanceEndEditable --> </div>
+</div>
+
+<!-- InstanceBeginEditable name="body" -->
+<div class="cmfw">
+  <div class="cm-wd">
+    <div class="leader">
+      <p>Sorry, there is no web page matching your request.</p>
+      <p>It is possible that you typed the address incorrectly. The page or file you are looking for has been moved or does not exist. You may wish to try another entry or choose from the links below, which we hope will help you find what you're looking for.</p>
+    </div>
+    <div class="cmfw">
+      <ul class="sitemplist">
+        <li class="mar-bot10"><a name="CharmHealth EHR Home" title="CharmHealth EHR Home" href="https://www.charmhealth.com/" style="color:#9A006A;">Home</a></li>
+        <li class="mar-bot10">
+          <h4>Product Site Map</h4>
+          <ul>
+            <li><a name="CharmHealth EHR Site Map" title="CharmHealth EHR Site Map" href="https://www.charmhealth.com/ehr/sitemap.html">CharmHealth EHR Site Map</a></li>
+            <li><a name="Resources Site Map" title="Resources Site Map" href="https://www.charmhealth.com/resources/sitemap.html">Resources Site Map</a></li>
+          </ul>
+        </li>
+        <li class="mar-bot10">
+          <h4>Charm Site Map</h4>
+        </li>
+        <li class="mar-bot10">
+          Products
+          <ul>
+             <li><a href="https://www.charmhealth.com/ehr/" title="Electronic Health Records" name="Electronic Health Records">Electronic Health Records</a></li>
+            <li><a href="https://www.charmhealth.com/practice-management/" title="Practice Management" name="Practice Management">Practice Management</a></li>
+            <li><a href="https://www.charmhealth.com/revenue-cycle-management/" title="Revenue Cycle Management" name="Revenue Cycle Management">Revenue Cycle Management</a></li>
+            <li><a href="https://www.charmhealth.com/patient-engagement/" title="Patient Engagement" name="Patient Engagement">Patient Engagement</a></li>
+            <li><a target="_blank" href="https://www.charmhealth.com/telehealth/" title="TeleHealth" name="TeleHealth">TeleHealth</a>
+              <ul>
+                <li><a target="_blank" href="https://www.charmhealth.com/telehealth/signup.html" title="TeleHealth Registration" name="TeleHealth Registration">TeleHealth Registration</a></li>
+                <li><a target="_blank" href="https://www.charmhealth.com/telehealth/termsofservice.html" title="Terms of Service - TeleHealth" name="Terms of Service - TeleHealth">Terms of Service - TeleHealth</a></li>
+              </ul>
+            </li>
+            <li><a target="_blank" href="https://www.charmhealth.com/medical-billing-platform/" title="Medical Billing Platform" name="Medical Billing Platform">Medical Billing Platform</a>
+              <ul>
+                <li><a target="_blank" href="https://www.charmhealth.com/medical-billing-platform/signup.html" title="Medical Billing Platform Registration" name="Medical Billing Platform Registration">Medical Billing Platform Registration</a></li>
+                <li><a target="_blank" href="https://www.charmhealth.com/medical-billing-platform/termsofservice.html" title="Terms of Service - Medical Billing Platform" name="Terms of Service - Medical Billing Platform">Terms of Service - Medical Billing Platform</a></li>
+              </ul>
+            </li>
+            <li><a target="_blank" href="https://www.charmhealth.com/connect/" title="Connect" name="Connect">Connect</a>
+              <ul>
+                <li><a target="_blank" href="https://www.charmhealth.com/connect/signup.html" title="Charm Connect Registration" name="Charm Connect Registration">Charm Connect Registration</a></li>
+                <li><a target="_blank" href="https://www.charmhealth.com/connect/termsofservice.html" title="Terms of Service - Connect" name="Terms of Service - Connect">Terms of Service - Connect</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="mar-bot10">
+          Revenue Cycle Management
+          <ul>
+            <li><a name="Revenue Cycle Management Service" title="Revenue Cycle Management Service" href="https://www.charmhealth.com/revenue-cycle-management/revenue-cycle-management-service.html">Revenue Cycle Management Service</a></li>
+            <li><a name="Medical Billing Services" title="Medical Billing Services" href="https://www.charmhealth.com/revenue-cycle-management/healthcare-medical-billing-services.html">Medical Billing Services</a></li>
+            <li><a name="Patient Insurance Eligibility" title="Patient Insurance Eligibility" href="https://www.charmhealth.com/revenue-cycle-management/patient-insurance-eligibility-check.html">Patient Insurance Eligibility</a></li>
+            <li><a name="Medical Coding" title="Medical Coding" href="https://www.charmhealth.com/revenue-cycle-management/medical-coding.html">Medical Coding</a></li>
+            <li><a name="Claims Scrubbing" title="Claims Scrubbing" href="https://www.charmhealth.com/revenue-cycle-management/medical-claims-scrubbing.html">Claims Scrubbing</a></li>
+            <li><a name="Denial Management" title="Denial Management" href="https://www.charmhealth.com/revenue-cycle-management/claim-denial-management.html">Denial Management</a></li>
+            <li><a name="Payment Posting" title="Payment Posting" href="https://www.charmhealth.com/revenue-cycle-management/medical-payment-posting.html">Payment Posting</a></li>
+            <li><a name="Revenue Cycle Management Services Enquiry" title="Revenue Cycle Management Services Enquiry" href="https://www.charmhealth.com/ehr/revenue-cycle-management.html">Revenue Cycle Management Services Enquiry</a></li>
+            <li><a name="CharmRCM Health IOS App" title="Charm RCM Health IOS App" href="https://www.charmhealth.com/mobile-health-app.html#rcm-mobile-app">Charm RCM Health IOS App</a></li>
+          </ul>
+        </li>
+        <li class="mar-bot10"><a name="CharmHealth EHR Community Forums" title="CharmHealth EHR Community Forums" href="https://forums.charmhealth.com" target="_blank" style="color:#9A006A;">Community Forums</a></li>
+        <li class="mar-bot10"><a name="Mobile Health Apps" title="Mobile Health Apps" href="https://www.charmhealth.com/mobile-health-app.html" style="color:#9A006A;">Mobile Health Apps</a></li>
+        <li class="mar-bot10"><a name="About Us" title="About Us" href="https://www.charmhealth.com/aboutus.html" style="color:#9A006A;">About Us</a></li>
+        <li class="mar-bot10"><a name="CharmHealth EHR Contact Info" title="CharmHealth EHR Contact Info" href="https://www.charmhealth.com/contactus.html" style="color:#9A006A;">Contact Us</a></li>
+        <li class="mar-bot10"><a name="Privacy Policy" title="Privacy Policy" href="https://www.charmhealth.com/privacy-policy.html" style="color:#9A006A;">Privacy Policy</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- InstanceEndEditable --> 
+
+<!------- Footer Include Start ------->
+<div id="footer"></div>
+<script>
+    // Load external HTML into main page
+    function loadHTML(id, url) {
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById(id).innerHTML = data;
+        });
+    }
+    loadHTML("footer", "/charm-footer.html");
+</script>
+<!------- Footer Include End ------->
+
+<!-- InstanceBeginEditable name="beforeendofbody" --><!-- InstanceEndEditable -->
+
+<script src="/js/dialpadchat.js"></script>
+</body>
+
+<!-- InstanceBeginEditable name="bottomCont" -->
+<script type="text/javascript">
+	$('#sitemap').addClass('tml-sel');
+	</script>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceEnd --></html>
