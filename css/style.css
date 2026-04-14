@@ -480,7 +480,30 @@ html[data-theme="dark"] .btn-outline:hover { background: rgba(255,255,255,0.08);
   font-size: var(--text-base); font-weight: var(--font-semibold);
   color: var(--color-text-muted); padding: var(--space-3) var(--space-4);
 }
-.mobile-menu-cta { margin-top: var(--space-2); align-self: flex-start; }
+.mobile-menu .mobile-menu-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-4);
+  align-self: flex-start;
+  color: #fff !important;
+  background: var(--color-accent);
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  pointer-events: all;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(37,99,235,0.2);
+}
+.mobile-menu .mobile-menu-cta:hover,
+.mobile-menu .mobile-menu-cta:active {
+  background: var(--color-accent-dark);
+  color: #fff !important;
+  box-shadow: var(--shadow-accent);
+}
 
 /* ── HERO (Home) ── */
 .hero {
